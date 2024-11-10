@@ -7,9 +7,8 @@ public class LoggedPostsPage extends AnonPostsPage{
 
     private LoggedHeader loggedHeader;
 
-    public LoggedPostsPage(String pageSpecificUrl) {
-        super("/");
-        this.loggedHeader = new LoggedHeader("/");
+    public LoggedPostsPage() {
+        this.loggedHeader = new LoggedHeader();
     }
 
     protected final By likeBtn = By.cssSelector("input[value='Like']");

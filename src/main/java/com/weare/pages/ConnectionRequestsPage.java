@@ -5,9 +5,5 @@ import org.openqa.selenium.By;
 
 public class ConnectionRequestsPage extends LoggedHeader {
 
-    public ConnectionRequestsPage(String pageSpecificUrl) {
-        super("/");
-    }
-
     protected final By approveBtn = By.cssSelector("input[value*='Approve']");
 }

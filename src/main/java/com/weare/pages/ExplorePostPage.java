@@ -5,10 +5,6 @@ import org.openqa.selenium.By;
 
 public class ExplorePostPage extends LoggedHeader {
 
-    public ExplorePostPage(String pageSpecificUrl) {
-        super("/");
-    }
-
     protected final By allPostsByUserBtn = By.cssSelector("input[value*='All']");
     protected final By editPostBtn = By.linkText("Edit post");
     protected final By deletePostBtn = By.linkText("Delete post");

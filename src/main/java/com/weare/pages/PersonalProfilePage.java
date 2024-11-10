@@ -5,10 +5,10 @@ import org.openqa.selenium.By;
 
 public class PersonalProfilePage extends LoggedHeader {
 
-    public PersonalProfilePage(String pageSpecificUrl) {
-        super("/");
-    }
-
     protected final By friendRequestsBtn = By.cssSelector("input[type='submit']");
     protected final By editProfileBtn = By.xpath("//a[contains(text(),'edit')]");
+
+    public void openEditor() {
+        driver().findElement(editProfileBtn).click();
+    }
 }

@@ -5,10 +5,6 @@ import org.openqa.selenium.By;
 
 public class LoginPage extends AnonHeader {
 
-    public LoginPage(String pageSpecificUrl) {
-        super("/login");
-    }
-
     protected final By usernameField = By.id("username");
     protected final By passwordField = By.id("password");
     protected final By loginBtn = By.cssSelector("input[value='Login']");

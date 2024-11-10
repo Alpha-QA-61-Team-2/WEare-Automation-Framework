@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 
 public class BaseHeader extends BasePage {
 
-    public BaseHeader(String pageSpecificUrl) {
+    public BaseHeader() {
         super("/");
     }
 

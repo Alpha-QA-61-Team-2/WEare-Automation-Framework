@@ -1,5 +1,10 @@
 package wearetests.core;
 
+import com.weare.pages.*;
+import com.weare.pages.header.AdminHeader;
+import com.weare.pages.header.AnonHeader;
+import com.weare.pages.header.BaseHeader;
+import com.weare.pages.header.LoggedHeader;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -7,17 +12,45 @@ import org.junit.jupiter.api.BeforeEach;
 import testframework.PropertiesManager;
 import testframework.core.BaseWebTest;
 
+import java.sql.Connection;
+
 public class WEareBaseWebTest extends BaseWebTest {
 
-    //Todo List all pages as fields
+    protected AdminHeader adminHeader;
+    protected AnonHeader anonHeader;
+    protected BaseHeader baseHeader;
+    protected LoggedHeader loggedHeader;
+    protected AnonPostsPage anonPostsPage;
+    protected ConnectionRequestsPage connectionRequestsPage;
+    protected DeleteConfirmationPage deleteConfirmationPage;
+    protected ExplorePostPage explorePostPage;
+    protected LoggedPostsPage loggedPostsPage;
+    protected LoginPage loginPage;
+    protected PersonalProfilePage personalProfilePage;
+    protected PostCreationEditPage postCreationEditPage;
+    protected ProfileEditorPage profileEditorPage;
+    protected RegistrationPage registrationPage;
 
     @BeforeEach
     public void beforeTests() {
         // perform some code before each test starts
-        //Todo initialize all fields
+        this.adminHeader = new AdminHeader();
+        this.anonHeader = new AnonHeader();
+        this.baseHeader = new BaseHeader();
+        this.loggedHeader = new LoggedHeader();
+        this.anonPostsPage = new AnonPostsPage();
+        this.connectionRequestsPage = new ConnectionRequestsPage();
+        this.deleteConfirmationPage = new DeleteConfirmationPage();
+        this.explorePostPage = new ExplorePostPage();
+        this.loggedPostsPage = new LoggedPostsPage();
+        this.loginPage = new LoginPage();
+        this.personalProfilePage = new PersonalProfilePage();
+        this.postCreationEditPage = new PostCreationEditPage();
+        this.profileEditorPage = new ProfileEditorPage();
+        this.registrationPage = new RegistrationPage();
 
         // Navigate to base page
-        driver().get(PropertiesManager.getConfigProperties().getProperty("sauceDemoBaseUrl"));
+        driver().get(PropertiesManager.getConfigProperties().getProperty("weareBaseUrl"));
     }
 
     @BeforeAll
