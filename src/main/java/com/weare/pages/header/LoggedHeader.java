@@ -1,6 +1,7 @@
 package com.weare.pages.header;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 
 public class LoggedHeader extends BaseHeader {
 
@@ -13,6 +14,10 @@ public class LoggedHeader extends BaseHeader {
     }
 
     public boolean logoutBtnIsVisible() {
-        return driver().findElement(logoutBtn).isDisplayed();
+        try {
+            return driver().findElement(logoutBtn).isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
     }
 }
