@@ -20,7 +20,7 @@ public class RegistrationPage extends AnonHeader {
         driver().findElement(regBtn).click();
     }
 
-    public boolean welcomeMessageIsDisplayed() {
-       return driver().findElement(By.cssSelector("h1[class*='mb-3']")).getText().contains("Welcome");
+    public boolean pageTitleIsSuccessful() {
+       return driver().getTitle().equals("Successful Registration");
     }
 }
