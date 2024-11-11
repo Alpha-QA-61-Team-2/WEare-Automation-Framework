@@ -12,7 +12,7 @@ public class UserTests extends WEareBaseWebTest {
         anonHeader.clickRegister();
         registrationPage.submitRegistrationForm(TestData.USERNAME.getValue(),
                 TestData.EMAIL.getValue(), TestData.PASSWORD.getValue(), TestData.CONFIRM_PASSWORD.getValue());
-        Assertions.assertTrue(registrationPage.welcomeMessageIsDisplayed());
+        Assertions.assertTrue(registrationPage.pageTitleIsSuccessful());
     }
 
     @Test

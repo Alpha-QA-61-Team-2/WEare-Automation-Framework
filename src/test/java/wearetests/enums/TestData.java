@@ -1,7 +1,7 @@
 package wearetests.enums;
 
 public enum TestData {
-    USERNAME("Selen"),
+    USERNAME("boiko"),
     EMAIL("zelen@abv.com"),
     PASSWORD("123123"),
     CONFIRM_PASSWORD("123123");
