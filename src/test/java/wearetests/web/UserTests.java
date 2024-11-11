@@ -16,9 +16,12 @@ public class UserTests extends WEareBaseWebTest {
     }
 
     @Test
-    public void userCanUpdateProfile_when_validDaraProvided() {
+    public void userCanUpdateProfile_when_validDataProvided() {
+        anonHeader.clickSignIn();
+        loginPage.submitLoginForm(TestData.USERNAME.getValue(), TestData.PASSWORD.getValue());
         loggedHeader.goToPersonalProfile();
         personalProfilePage.openEditor();
-        profileEditorPage.submitUpdateForm();
+        profileEditorPage.submitUpdateForm(TestData.FIRST_NAME.getValue(), TestData.LAST_NAME.getValue());
+        Assertions.assertTrue(profileEditorPage.updatedDetailsAreSaved(TestData.LAST_NAME.getValue()));
     }
 }
