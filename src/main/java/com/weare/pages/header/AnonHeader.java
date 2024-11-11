@@ -10,4 +10,8 @@ public class AnonHeader extends BaseHeader{
     public void clickRegister() {
         driver().findElement(registerBtn).click();
     }
+
+    public void clickSignIn() {
+        driver().findElement(signInBtn).click();
+    }
 }
