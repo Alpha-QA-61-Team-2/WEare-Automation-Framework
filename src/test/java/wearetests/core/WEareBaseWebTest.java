@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import testframework.PropertiesManager;
 import testframework.core.BaseWebTest;
+import wearetests.enums.TestData;
 
 import java.sql.Connection;
 
@@ -20,6 +21,7 @@ public class WEareBaseWebTest extends BaseWebTest {
     protected AnonHeader anonHeader;
     protected BaseHeader baseHeader;
     protected LoggedHeader loggedHeader;
+    protected HomePage homePage;
     protected AnonPostsPage anonPostsPage;
     protected ConnectionRequestsPage connectionRequestsPage;
     protected DeleteConfirmationPage deleteConfirmationPage;
@@ -38,6 +40,7 @@ public class WEareBaseWebTest extends BaseWebTest {
         this.anonHeader = new AnonHeader();
         this.baseHeader = new BaseHeader();
         this.loggedHeader = new LoggedHeader();
+        this.homePage = new HomePage();
         this.anonPostsPage = new AnonPostsPage();
         this.connectionRequestsPage = new ConnectionRequestsPage();
         this.deleteConfirmationPage = new DeleteConfirmationPage();
@@ -71,8 +74,9 @@ public class WEareBaseWebTest extends BaseWebTest {
     }
 
     // Extract methods that use multiple pages
-    public void authenticateWithUser(String username, String pass) {
-
+    protected void authenticateWithUser(String username) {
+        anonHeader.clickSignIn();
+        loginPage.submitLoginForm(username, TestData.PASSWORD.getValue());
     }
 }
 

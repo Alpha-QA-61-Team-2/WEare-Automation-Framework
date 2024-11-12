@@ -13,7 +13,11 @@ public class LoggedHeader extends BaseHeader {
         driver().findElement(personalProfileBtn).click();
     }
 
-    public boolean logoutBtnIsVisible() {
+    public void clickLogoutBtn() {
+        driver().findElement(logoutBtn).click();
+    }
+
+    public boolean isLogoutBtnVisible() {
         try {
             return driver().findElement(logoutBtn).isDisplayed();
         } catch (NoSuchElementException e) {
