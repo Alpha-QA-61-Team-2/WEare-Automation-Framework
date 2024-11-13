@@ -14,6 +14,7 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertTrue;
+import static wearetests.enums.TestData.PASSWORD;
 
 import org.junit.FixMethodOrder;
 import org.junit.runners.MethodSorters;
@@ -21,6 +22,8 @@ import org.junit.runners.MethodSorters;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestAddAndApproveFriendRequest {
 
+    public static final String OLGA = "Olga";
+    public static final String MARTIN = "Martin";
     private WebDriver driver;
     JavascriptExecutor js;
 
@@ -49,12 +52,12 @@ public class TestAddAndApproveFriendRequest {
         // Step 3: Enter username
         WebElement usernameField = driver.findElement(By.id("username"));
         assertThat("Username field is not displayed", usernameField.isDisplayed(), is(true));
-        usernameField.sendKeys("Olga");
+        usernameField.sendKeys(OLGA);
 
         // Step 4: Enter password
         WebElement passwordField = driver.findElement(By.id("password"));
         assertThat("Password field is not displayed", passwordField.isDisplayed(), is(true));
-        passwordField.sendKeys("123456");
+        passwordField.sendKeys(PASSWORD.getValue());
 
         // Step 5: Submit login form
         passwordField.sendKeys(Keys.ENTER);
@@ -96,9 +99,9 @@ public class TestAddAndApproveFriendRequest {
         // 4 | click | id=username |
         driver.findElement(By.id("username")).click();
         // 5 | type | id=username | Martin
-        driver.findElement(By.id("username")).sendKeys("Martin");
+        driver.findElement(By.id("username")).sendKeys(MARTIN);
         // 6 | type | id=password | 123456
-        driver.findElement(By.id("password")).sendKeys("123456");
+        driver.findElement(By.id("password")).sendKeys(PASSWORD.toString());
         // 7 | click | css=input:nth-child(10) |
         driver.findElement(By.cssSelector("input:nth-child(10)")).click();
         // 8 | click | css=.nav-item:nth-child(5) > .nav-link |
