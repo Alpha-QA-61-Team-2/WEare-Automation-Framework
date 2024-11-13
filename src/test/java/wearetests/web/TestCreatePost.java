@@ -77,7 +77,7 @@ public class TestCreatePost {
         assertTrue(postNav.isDisplayed(), "Post navigation link is not displayed");
         postNav.click();
 
-        // Scroll down by 200 pixels
+        // Scroll down:
         js.executeScript("window.scrollBy(0, 400);");
 
         // 9 | select | id=StringListId | label=Public post
