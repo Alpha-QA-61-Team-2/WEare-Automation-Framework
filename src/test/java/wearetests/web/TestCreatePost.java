@@ -12,6 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import static wearetests.enums.TestData.PASSWORD;
 
 import java.time.Duration;
 
@@ -19,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestCreatePost {
+    public static final String OLGA = "Olga";
     private WebDriver driver;
     JavascriptExecutor js;
 
@@ -56,14 +58,14 @@ public class TestCreatePost {
         usernameField.click();
 
         // 5 | type | id=username | Olga
-        usernameField.sendKeys("Olga");
-        assertEquals("Olga", usernameField.getAttribute("value"), "Username field did not update correctly");
+        usernameField.sendKeys(OLGA);
+        assertEquals(OLGA, usernameField.getAttribute("value"), "Username field did not update correctly");
 
         // 6 | type | id=password | 123456
         WebElement passwordField = driver.findElement(By.id("password"));
         assertTrue(passwordField.isDisplayed(), "Password field is not displayed");
-        passwordField.sendKeys("123456");
-        assertEquals("123456", passwordField.getAttribute("value"), "Password field did not update correctly");
+        passwordField.sendKeys(PASSWORD.getValue());
+        assertEquals(PASSWORD.getValue(), passwordField.getAttribute("value"), "Password field did not update correctly");
 
         // 7 | click | css=input:nth-child(10) |
         WebElement submitButton = driver.findElement(By.cssSelector("input:nth-child(10)"));
