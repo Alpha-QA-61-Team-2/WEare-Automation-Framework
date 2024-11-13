@@ -1,8 +1,6 @@
 package wearetests.web;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,32 +11,31 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static wearetests.enums.TestData.PASSWORD;
 
-import org.junit.FixMethodOrder;
-import org.junit.runners.MethodSorters;
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TestAddAndApproveFriendRequest {
 
     public static final String OLGA = "Olga";
     public static final String MARTIN = "Martin";
-    private WebDriver driver;
-    JavascriptExecutor js;
+    private static WebDriver driver;
+    static JavascriptExecutor js;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         driver = new ChromeDriver();
         js = (JavascriptExecutor) driver;
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         driver.quit();
     }
 
     @Test
+    @Order(1)
     public void testAddFriend() {
         // Step 1: Open main page
         driver.get("http://localhost:8081/");
@@ -82,11 +79,11 @@ public class TestAddAndApproveFriendRequest {
         //assert that page contains text: Good job! You have send friend request!
         WebElement successMessageForConnecting = driver.findElement(By.xpath("/html/body/section[1]/div[2]/div[2]"));
 
-        assertTrue("Success message not displayed as expected!",
-                successMessageForConnecting.getText().contains("Good job! You have send friend request!"));
+        assertTrue(successMessageForConnecting.getText().contains("Good job! You have send friend request!"));
     }
 
     @Test
+    @Order(2)
     public void testApproveFriendRequest() {
         // Step # | name | target | value
 
@@ -117,7 +114,7 @@ public class TestAddAndApproveFriendRequest {
 
         // assertion: check that element with `value="Approve Request"` is not present in the page:
         List<WebElement> approveRequestButtons = driver.findElements(By.cssSelector("input.btn.btn-primary.py-2[value='Approve Request']"));
-        assertTrue("There should be no 'Approve Request' button on the page after approval", approveRequestButtons.isEmpty());
+        assertTrue(approveRequestButtons.isEmpty());
 
         // wait for element h3 containing „There are no requests“ to be visible:
         boolean isTextPresent = wait.until(driver -> {
@@ -126,7 +123,7 @@ public class TestAddAndApproveFriendRequest {
         });
 
         //assertion that there is at least one h3 element containing this text
-        assertTrue("Page should display message 'There are no requests'", isTextPresent);
+        assertTrue(isTextPresent);
     }
 
 }
