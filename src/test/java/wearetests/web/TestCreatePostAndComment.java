@@ -2,80 +2,26 @@ package wearetests.web;
 
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.openqa.selenium.By.cssSelector;
-import static wearetests.enums.TestData.PASSWORD;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static wearetests.web.TestAddAndApproveFriendRequest.resizeWindow;
+import static wearetests.enums.TestData.PASSWORD;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class TestCreatePostAndComment {
-    public static final String BODY_OF_THE_POST = "this is a post test post is this is this what is this this is it!";
-    public static final String BODY_OF_THE_COMMENT = "this is a test comment to test the comment send functionality";
-    public static final String OLGA = "Olga";
-    private WebDriver driver;
-    JavascriptExecutor js;
+public class TestCreatePostAndComment extends BaseTestClassOlga {
 
-    @BeforeEach
-    public void setUp() {
-        driver = new ChromeDriver();
-        js = (JavascriptExecutor) driver;
-    }
-    @AfterEach
-    public void tearDown() {
-        driver.quit();
-    }
-
-
-    //@RepeatedTest(5)
-    @Test
+    @RepeatedTest(4)
+    //@Test
     @Order(1)
     public void createPostTest() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
-
-        // 1 | open | / |
-        driver.get("http://localhost:8081/");
-
-        // 2 | setWindowSize | 1552x840 |
-        //resizeWindow();
-
-        // 3 | click | css=.nav-item:nth-child(2) > .nav-link |
-        WebElement loginNav = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".nav-item:nth-child(2) > .nav-link")));
-        assertTrue(loginNav.isDisplayed(), "Login navigation link is not displayed");
-        loginNav.click();
-
-        // 4 | click | id=username |
-        WebElement usernameField = wait.until(ExpectedConditions.elementToBeClickable(By.id("username")));
-        assertTrue(usernameField.isDisplayed(), "Username field is not displayed");
-        usernameField.click();
-
-        // 5 | type | id=username | Olga
-        usernameField.sendKeys(OLGA);
-        assertEquals(OLGA, usernameField.getAttribute("value"), "Username field did not update correctly");
-
-        // 6 | type | id=password | 123456
-        WebElement passwordField = driver.findElement(By.id("password"));
-        assertTrue(passwordField.isDisplayed(), "Password field is not displayed");
-        passwordField.sendKeys(PASSWORD.getValue());
-        assertEquals(PASSWORD.getValue(), passwordField.getAttribute("value"), "Password field did not update correctly");
-
-        // 7 | click | css=input:nth-child(10) |
-        WebElement submitButton = driver.findElement(By.cssSelector("input:nth-child(10)"));
-        assertTrue(submitButton.isDisplayed(), "Submit button is not displayed");
-        submitButton.click();
+        loginWithUsernameAndPassword(OLGA, PASSWORD);
 
         // 8 | click | css=.nav-item:nth-child(8) > .nav-link |
         WebElement postNav = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".nav-item:nth-child(8) > .nav-link")));
@@ -114,34 +60,18 @@ public class TestCreatePostAndComment {
     }
 
 
-    //@RepeatedTest(5)
-    @Test
+    @RepeatedTest(4)
+    //@Test
     @Order(2)
     public void createCommentTest() {
-        // Test name: createComment
-        // Step # | name | target | value
-        // 1 | open | / |
-        driver.get("http://localhost:8081/");
-        // 2 | setWindowSize | 1552x840 |
-        //resizeWindow();
-        // 3 | click | css=.nav-item:nth-child(2) > .nav-link |
-        driver.findElement(cssSelector(".nav-item:nth-child(2) > .nav-link")).click();
-        // 4 | click | id=username |
-        driver.findElement(By.id("username")).click();
-        // 5 | type | id=username | Olga
-        driver.findElement(By.id("username")).sendKeys(OLGA);
-        // 6 | type | id=password | 123456
-        driver.findElement(By.id("password")).sendKeys(PASSWORD.getValue());
-        // 7 | click | css=input:nth-child(10) |
-        driver.findElement(cssSelector("input:nth-child(10)")).click();
+        loginWithUsernameAndPassword(OLGA, PASSWORD);
+
         // 8 | click | linkText=Latest Posts |
         driver.findElement(By.linkText("Latest Posts")).click();
         // 9 | click | css=.btn:nth-child(1) |
         driver.findElement(cssSelector(".btn:nth-child(1)")).click();
 
-
         // 10 | wait until element is clickable and click | id=message |
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         WebElement messageField = wait.until(ExpectedConditions.elementToBeClickable(By.id("message")));
         messageField.click();
 
@@ -161,7 +91,6 @@ public class TestCreatePostAndComment {
         WebElement showCommentField = wait.until(ExpectedConditions.elementToBeClickable(
                 By.xpath("//*[text()='Show Comments']")));
         showCommentField.click();
-
 
         // **Assertion Steps**
         // 1. Locate the comment container

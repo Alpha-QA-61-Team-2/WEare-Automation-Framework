@@ -2,11 +2,8 @@ package wearetests.web;
 
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -14,50 +11,14 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static wearetests.enums.TestData.PASSWORD;
 
-
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class TestAddAndApproveFriendRequest {
+public class TestAddAndApproveFriendRequest extends BaseTestClassOlga {
 
-    public static final String OLGA = "Olga";
-    public static final String MARTIN = "Martin";
-    private static WebDriver driver;
-    static JavascriptExecutor js;
-
-    @BeforeEach
-    public void setUp() {
-        driver = new ChromeDriver();
-        js = (JavascriptExecutor) driver;
-    }
-
-    @AfterEach
-    public void tearDown() {
-        driver.quit();
-    }
 
     @Test
     @Order(1)
     public void testAddFriend() {
-        // Step 1: Open main page
-        driver.get("http://localhost:8081/");
-        //resizeWindow();
-
-        // Step 2: Navigate to login page and verify navigation
-        WebElement loginNavLink = driver.findElement(By.cssSelector(".nav-item:nth-child(2) > .nav-link"));
-        assertThat("Login link is not displayed", loginNavLink.isDisplayed(), is(true));
-        loginNavLink.click();
-
-        // Step 3: Enter username
-        WebElement usernameField = driver.findElement(By.id("username"));
-        assertThat("Username field is not displayed", usernameField.isDisplayed(), is(true));
-        usernameField.sendKeys(OLGA);
-
-        // Step 4: Enter password
-        WebElement passwordField = driver.findElement(By.id("password"));
-        assertThat("Password field is not displayed", passwordField.isDisplayed(), is(true));
-        passwordField.sendKeys(PASSWORD.getValue());
-
-        // Step 5: Submit login form
-        passwordField.sendKeys(Keys.ENTER);
+        loginWithUsernameAndPassword(OLGA, PASSWORD);
 
         // Step 6: Verify successful login by checking redirection to profile page
         driver.get("http://localhost:8081/auth/users/41/profile");
@@ -85,30 +46,15 @@ public class TestAddAndApproveFriendRequest {
     @Test
     @Order(2)
     public void testApproveFriendRequest() {
-        // Step # | name | target | value
+        loginWithUsernameAndPassword(MARTIN, PASSWORD);
 
-        // 1 | open | / |
-        driver.get("http://localhost:8081/");
-        // 2 | setWindowSize | 1552x840 |
-        //resizeWindow();
-        // 3 | click | css=.nav-item:nth-child(2) > .nav-link |
-        driver.findElement(By.cssSelector(".nav-item:nth-child(2) > .nav-link")).click();
-        // 4 | click | id=username |
-        driver.findElement(By.id("username")).click();
-        // 5 | type | id=username | Martin
-        driver.findElement(By.id("username")).sendKeys(MARTIN);
-        // 6 | type | id=password | 123456
-        driver.findElement(By.id("password")).sendKeys(PASSWORD.toString());
-        // 7 | click | css=input:nth-child(10) |
-        driver.findElement(By.cssSelector("input:nth-child(10)")).click();
-        // 8 | click | css=.nav-item:nth-child(5) > .nav-link |
-        driver.findElement(By.cssSelector(".nav-item:nth-child(5) > .nav-link")).click();
-        // 9 | click | css=.btn |
-        driver.findElement(By.cssSelector(".btn")).click();
+        // Step # | name | target | value
+        driver.get("http://localhost:8081/auth/users/41/profile");
+        String currentUrl = driver.getCurrentUrl();
+
+        driver.findElement(By.xpath("/html/body/section[1]/div[2]/form/input")).click();
 
         // wait for element to be clickable
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-
         WebElement approveButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("input.btn.btn-primary.py-2[value='Approve Request']")));
         approveButton.click();
 
@@ -124,10 +70,6 @@ public class TestAddAndApproveFriendRequest {
 
         //assertion that there is at least one h3 element containing this text
         assertTrue(isTextPresent);
-    }
-
-    static void resizeWindow() {
-        driver.manage().window().setSize(new Dimension(1552, 840));
     }
 }
 
