@@ -25,7 +25,7 @@ public class ProfileEditorPage extends LoggedHeader {
         driver().findElement(lastNameField).sendKeys(lastName);
         driver().findElement(birthDateField).sendKeys("01/01/1999");
         driver().findElement(emailField).clear();
-        driver().findElement(emailField).sendKeys("some@mail.com");
+        driver().findElement(emailField).sendKeys("aaa@aa.aa");
         Select city = new Select(driver().findElement(citySelect));
         city.selectByVisibleText("Dospat");
         driver().findElement(updateBtn).click();
