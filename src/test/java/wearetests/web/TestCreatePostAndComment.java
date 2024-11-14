@@ -19,6 +19,7 @@ import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static wearetests.web.TestAddAndApproveFriendRequest.resizeWindow;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TestCreatePostAndComment {
@@ -49,7 +50,7 @@ public class TestCreatePostAndComment {
         driver.get("http://localhost:8081/");
 
         // 2 | setWindowSize | 1552x840 |
-        driver.manage().window().setSize(new Dimension(1552, 840));
+        //resizeWindow();
 
         // 3 | click | css=.nav-item:nth-child(2) > .nav-link |
         WebElement loginNav = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".nav-item:nth-child(2) > .nav-link")));
@@ -122,7 +123,7 @@ public class TestCreatePostAndComment {
         // 1 | open | / |
         driver.get("http://localhost:8081/");
         // 2 | setWindowSize | 1552x840 |
-        driver.manage().window().setSize(new Dimension(1552, 840));
+        //resizeWindow();
         // 3 | click | css=.nav-item:nth-child(2) > .nav-link |
         driver.findElement(cssSelector(".nav-item:nth-child(2) > .nav-link")).click();
         // 4 | click | id=username |

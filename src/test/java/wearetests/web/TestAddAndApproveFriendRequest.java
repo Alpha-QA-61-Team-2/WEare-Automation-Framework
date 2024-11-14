@@ -39,7 +39,7 @@ public class TestAddAndApproveFriendRequest {
     public void testAddFriend() {
         // Step 1: Open main page
         driver.get("http://localhost:8081/");
-        driver.manage().window().setSize(new Dimension(1552, 840));
+        //resizeWindow();
 
         // Step 2: Navigate to login page and verify navigation
         WebElement loginNavLink = driver.findElement(By.cssSelector(".nav-item:nth-child(2) > .nav-link"));
@@ -90,7 +90,7 @@ public class TestAddAndApproveFriendRequest {
         // 1 | open | / |
         driver.get("http://localhost:8081/");
         // 2 | setWindowSize | 1552x840 |
-        driver.manage().window().setSize(new Dimension(1552, 840));
+        //resizeWindow();
         // 3 | click | css=.nav-item:nth-child(2) > .nav-link |
         driver.findElement(By.cssSelector(".nav-item:nth-child(2) > .nav-link")).click();
         // 4 | click | id=username |
@@ -126,5 +126,8 @@ public class TestAddAndApproveFriendRequest {
         assertTrue(isTextPresent);
     }
 
+    static void resizeWindow() {
+        driver.manage().window().setSize(new Dimension(1552, 840));
+    }
 }
 
