@@ -19,4 +19,8 @@ public abstract class BaseWebTest {
     public static void afterAll() {
         driver().close();
     }
+
+
+    protected void setUp() {
+    }
 }

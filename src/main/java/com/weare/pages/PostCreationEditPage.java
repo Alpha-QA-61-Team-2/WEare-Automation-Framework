@@ -9,4 +9,5 @@ public class PostCreationEditPage extends LoggedHeader {
     protected final By textField = By.id("message");
     protected final By chooseFileBtn = By.id("imagefile");
     protected final By savePostBtn = By.cssSelector("input[type='submit']");
+    //protected final By likeButton =
 }
