@@ -17,8 +17,8 @@ import static wearetests.enums.TestData.PASSWORD;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TestCreatePostAndComment extends BaseTestClassOlga {
 
-    @RepeatedTest(4)
-    //@Test
+    //@RepeatedTest(4)
+    @Test
     @Order(1)
     public void createPostTest() {
         loginWithUsernameAndPassword(OLGA, PASSWORD);
@@ -60,8 +60,8 @@ public class TestCreatePostAndComment extends BaseTestClassOlga {
     }
 
 
-    @RepeatedTest(4)
-    //@Test
+    //@RepeatedTest(4)
+    @Test
     @Order(2)
     public void createCommentTest() {
         loginWithUsernameAndPassword(OLGA, PASSWORD);
