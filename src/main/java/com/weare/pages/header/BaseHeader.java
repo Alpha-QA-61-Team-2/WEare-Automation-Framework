@@ -12,4 +12,8 @@ public class BaseHeader extends BasePage {
     protected final By homeBtn = By.linkText("Home");
     protected final By latestPostsBtn = By.linkText("Latest Posts");
     protected final By aboutUsBtn = By.linkText("About us");
+
+    public void viewLatestPosts() {
+        driver().findElement(latestPostsBtn).click();
+    }
 }

@@ -1,0 +1,12 @@
+{
+  "id": 0,
+  "firstName": "Milko",
+  "lastName": "Antoff",
+  "sex": "MALE",
+  "location": {},
+  "birthYear": "2001-01-02",
+  "personalReview": "",
+  "memberSince": "2023-11-14T15:30:00",
+  "picture": "",
+  "picturePrivacy": true
+}

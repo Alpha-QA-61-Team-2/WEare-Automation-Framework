@@ -5,9 +5,11 @@ import java.util.UUID;
 
 public enum TestData {
 
+    ADMIN_PROFILE("admin"),
     USER_1("olga"),
     USER_2("martin"),
     USER_3("milko"),
+    VALID_USER_ID("43"),
     USERNAME_CREATE("user"),
     EMAIL("rndm@abv.com"),
     PASSWORD("123456"),
@@ -28,6 +30,8 @@ public enum TestData {
         return value;
     }
 
+
+    //todo maybe remove below
     @Override
     public String toString() {
         return value;

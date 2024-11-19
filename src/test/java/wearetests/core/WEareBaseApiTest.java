@@ -2,11 +2,14 @@ package wearetests.core;
 
 import io.restassured.RestAssured;
 import io.restassured.config.EncoderConfig;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+import io.restassured.response.Response;
+import lombok.Getter;
+import org.junit.jupiter.api.*;
+import testframework.PropertiesManager;
 import testframework.core.BaseApiTest;
+import wearetests.api.Requests;
+
+import static io.restassured.RestAssured.given;
 
 
 public class WEareBaseApiTest extends BaseApiTest {
@@ -14,6 +17,8 @@ public class WEareBaseApiTest extends BaseApiTest {
     public static final int EXPECTED_STATUS_CODE = 200;
     public static final String REGISTRATION_CONFIRM_STRING = "was created";
 
+    @Getter
+    private static String sessionCookie;
 
     @BeforeEach
     public void beforeTests() {
@@ -27,6 +32,13 @@ public class WEareBaseApiTest extends BaseApiTest {
     @BeforeAll
     public static void beforeAll() {
         // perform some code before all tests start
+        Response loginResponse = given()
+                .header("Content-Type"
+                        , "multipart/form-data; boundary=<calculated when request is sent>")
+                .baseUri(PropertiesManager.getConfigProperties().getProperty("weareBaseUrl"))
+                .post("/authenticate");
+        sessionCookie = loginResponse.getCookie("JSESSIONID");
+        System.out.println(sessionCookie);
     }
 
 
@@ -39,5 +51,14 @@ public class WEareBaseApiTest extends BaseApiTest {
     @AfterAll
     public static void afterAll() {
         // perform some code after all tests have finished
+    }
+
+    protected void verifyStatusCodeIs200(Response response) {
+        Assertions.assertEquals(EXPECTED_STATUS_CODE, response.statusCode(), "Status code should be 200.");
+    }
+
+    protected void verifyBodyContainsString(Response response, String s) {
+        Assertions.assertTrue(response.body().asString().contains(s),
+                "Response body should contain '" + s + "'.");
     }
 }

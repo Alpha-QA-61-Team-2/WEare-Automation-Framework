@@ -9,12 +9,10 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.openqa.selenium.WebDriver;
+
 import testframework.PropertiesManager;
 import testframework.core.BaseWebTest;
 import wearetests.enums.TestData;
-
-import java.sql.Connection;
 
 public class WEareBaseWebTest extends BaseWebTest {
 
@@ -33,13 +31,9 @@ public class WEareBaseWebTest extends BaseWebTest {
     protected PostCreationEditPage postCreationEditPage;
     protected ProfileEditorPage profileEditorPage;
     protected RegistrationPage registrationPage;
-    protected NavigationPage navigationPage;
-    protected DeletePostPage deletePostPage;
 
     @BeforeEach
     public void beforeTests() {
-        super.setUp();  // Initializes driver in the parent class
-        WebDriver driver = driver();
         // perform some code before each test starts
         this.adminHeader = new AdminHeader();
         this.anonHeader = new AnonHeader();
@@ -56,9 +50,6 @@ public class WEareBaseWebTest extends BaseWebTest {
         this.postCreationEditPage = new PostCreationEditPage();
         this.profileEditorPage = new ProfileEditorPage();
         this.registrationPage = new RegistrationPage();
-        this.navigationPage = new NavigationPage();
-        this.deletePostPage = new DeletePostPage();
-
 
         // Navigate to base page
         driver().get(PropertiesManager.getConfigProperties().getProperty("weareBaseUrl"));
@@ -82,7 +73,7 @@ public class WEareBaseWebTest extends BaseWebTest {
     }
 
     // Extract methods that use multiple pages
-    protected void authenticateWithUser(String username) {
+    public void authenticateWithUser(String username) {
         anonHeader.clickSignIn();
         loginPage.submitLoginForm(username, TestData.PASSWORD.getValue());
     }

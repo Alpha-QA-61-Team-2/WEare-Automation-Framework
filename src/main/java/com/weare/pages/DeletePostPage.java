@@ -7,7 +7,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import testframework.DriverManager;
+
 import static testframework.DriverManager.driver;
+import static testframework.core.BaseWebTest.driver;
 
 import java.time.Duration;
 
@@ -57,20 +59,20 @@ public class DeletePostPage extends DriverManager {
         // Confirm delete action
         driver.findElement(By.cssSelector(".btn")).click();
     }
-    public boolean isPostDeletedSuccessfullyVisible() {
+
+    /*public boolean isPostDeletedSuccessfullyVisible() {
         try {
-            return driver.findElement(By.xpath("//*[contains(text(),'Post deleted successfully')]")).isDisplayed();
+            return driver().findElement(By.xpath("//*[contains(text(),'Post deleted successfully')]")).isDisplayed();
         } catch (NoSuchElementException e) {
             return false;
         }
     }
+
     public boolean isCommentDeletedSuccessfullyVisible() {
         try {
-            return driver.findElement(By.xpath("//*[contains(text(),'Comment deleted successfully')]")).isDisplayed();
+            return driver().findElement(By.xpath("//*[contains(text(),'Comment deleted successfully')]")).isDisplayed();
         } catch (NoSuchElementException e) {
             return false;
         }
-
-
-
-}}
+    }*/
+}

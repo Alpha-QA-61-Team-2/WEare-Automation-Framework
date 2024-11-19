@@ -1,0 +1,27 @@
+package wearetests.web;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import wearetests.core.WEareBaseWebTest;
+import wearetests.enums.TestData;
+
+
+public class PostLikeDislikeTest extends WEareBaseWebTest {
+
+
+    @Test
+    public void postLike () {
+        authenticateWithUser(TestData.ADMIN_PROFILE.getValue());
+        adminHeader.viewLatestPosts();
+        loggedPostsPage.clickLike();
+        Assertions.assertTrue(loggedPostsPage.isDislikeButtonVisible(), "Dislike button should be visible");
+    }
+
+    @Test
+    public void postDisLike () {
+        authenticateWithUser(TestData.ADMIN_PROFILE.getValue());
+        adminHeader.viewLatestPosts();
+        loggedPostsPage.clickDislike();
+        Assertions.assertTrue(loggedPostsPage.islikeButtonVisible(), "Like button should be visible");
+    }
+}

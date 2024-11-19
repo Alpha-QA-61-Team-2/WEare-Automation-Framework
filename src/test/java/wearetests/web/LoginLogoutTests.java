@@ -17,7 +17,8 @@ public class LoginLogoutTests extends WEareBaseWebTest {
     public void userNotAuthenticated_when_invalidCredentialsProvided() {
         anonHeader.clickSignIn();
         loginPage.submitLoginForm(TestData.USER_1.getValue(), TestData.WRONG_PASSWORD.getValue());
-        Assertions.assertTrue(loginPage.isInvalidCredentialsMsgDisplayed(), "Invalid credentials message should be displayed.");
+        Assertions.assertTrue(loginPage.isInvalidCredentialsMsgDisplayed()
+                , "Invalid credentials message should be displayed.");
     }
 
     @Test
