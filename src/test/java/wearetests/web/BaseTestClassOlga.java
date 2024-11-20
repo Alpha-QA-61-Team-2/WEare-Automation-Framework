@@ -36,39 +36,34 @@ public class BaseTestClassOlga {
 
     static void loginWithUsernameAndPassword(String username, Enum<?> password) {
 
-        // 1 | open | / |
+        // 1 open the site weare
         driver.get("http://localhost:8081/");
 
-        // 3 | click | css=.nav-item:nth-child(2) > .nav-link |
+        //3 find and click sign -in button
         WebElement loginNav = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".nav-item:nth-child(2) > .nav-link")));
         assertTrue(loginNav.isDisplayed(), "Login navigation link is not displayed");
         loginNav.click();
 
-        // 4 | click | id=username |
+        // 4 find and click username field
         WebElement usernameField = wait.until(ExpectedConditions.elementToBeClickable(By.id("username")));
         assertTrue(usernameField.isDisplayed(), "Username field is not displayed");
         usernameField.click();
 
-        // 5 | type | id=username | Olga
+        // 5 fill username field
         usernameField.sendKeys(username);
         assertEquals(username, usernameField.getAttribute("value"), "Username field did not update correctly");
 
-        // 6 | type | id=password | 123456
+        // 6 find and fill password field
         WebElement passwordField = driver.findElement(By.id("password"));
         assertTrue(passwordField.isDisplayed(), "Password field is not displayed");
         passwordField.sendKeys(password.toString());
         assertEquals(password.toString(), passwordField.getAttribute("value"), "Password field did not update correctly");
 
-        // 7 | click | css=input:nth-child(10) |
+        // 7 find and click login button
         WebElement submitButton = driver.findElement(By.cssSelector("input:nth-child(10)"));
         assertTrue(submitButton.isDisplayed(), "Submit button is not displayed");
         submitButton.click();
     }
 
-    /**
-     * if we need to resize the window after login;
-     */
-    static void resizeWindow() {
-        driver.manage().window().setSize(new Dimension(1552, 840));
-    }
+
 }

@@ -21,41 +21,42 @@ public class TestCreatePostAndComment extends BaseTestClassOlga {
     @Test
     @Order(1)
     public void createPostTest() {
+        //1 login
         loginWithUsernameAndPassword(OLGA, PASSWORD);
 
-        // 8 | click | css=.nav-item:nth-child(8) > .nav-link |
+        // 2 find element post in navigation bar and click it:
         WebElement postNav = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".nav-item:nth-child(8) > .nav-link")));
         assertTrue(postNav.isDisplayed(), "Post navigation link is not displayed");
         postNav.click();
 
-        // Scroll down:
+        // 3 Scroll down:
         js.executeScript("window.scrollBy(0, 400);");
 
-        // 9 | select | id=StringListId | label=Public post
+        // 4 select from the dropdown that the post to be public post; and click it:
         WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(By.id("StringListId")));
         assertTrue(dropdown.isDisplayed(), "Dropdown for post visibility is not displayed");
         dropdown.findElement(By.xpath("//option[. = 'Public post']")).click();
         assertEquals("true", dropdown.getAttribute("value"), "Dropdown selection did not update to 'Public post'");
 
-        // 10 | click | id=message |
+        // 5 find field for the body(message) of the post and click on it:
         WebElement messageField = wait.until(ExpectedConditions.elementToBeClickable(By.id("message")));
         assertTrue(messageField.isDisplayed(), "Message field is not displayed");
         messageField.click();
 
-        // 11 | type | id=message
+        // 6 fill the body(message) of the post with the message text:
         String messageText = BODY_OF_THE_POST;
         messageField.sendKeys(messageText);
         assertEquals(messageText, messageField.getAttribute("value"), "Message field did not update correctly");
 
-        // 12 | click | css=.btn |
+        // 7 find element post button and click on it:
         WebElement postButton = driver.findElement(By.cssSelector(".btn"));
         assertTrue(postButton.isDisplayed(), "Post button is not displayed");
         postButton.click();
 
-        // Verify post submission
+        // 8 Verify post submission
         WebElement confirmationMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/section[1]/div/div/div[1]/div/div/div/div[2]/p[2]")));
 
-        // Check that the confirmation message text matches the expected message content
+        // 9 Check that the confirmation message text matches the expected message content
         assertEquals(messageText, confirmationMessage.getText(), "Post confirmation message text does not match the expected message.");
     }
 
@@ -66,28 +67,28 @@ public class TestCreatePostAndComment extends BaseTestClassOlga {
     public void createCommentTest() {
         loginWithUsernameAndPassword(OLGA, PASSWORD);
 
-        // 8 | click | linkText=Latest Posts |
+        // 8 find latest posts
         driver.findElement(By.linkText("Latest Posts")).click();
-        // 9 | click | css=.btn:nth-child(1) |
+        // 9 | click on one of the latest posts
         driver.findElement(cssSelector(".btn:nth-child(1)")).click();
 
-        // 10 | wait until element is clickable and click | id=message |
+        // 10 | wait until element message field is clickable and click
         WebElement messageField = wait.until(ExpectedConditions.elementToBeClickable(By.id("message")));
         messageField.click();
 
-        // 11 | type | id=message | this is a test comment to test the comment send functionality
+        // 11 fill the message in the message field:
         messageField.sendKeys(BODY_OF_THE_COMMENT);
 
-        // 12 | click | css=.form-group > .btn |
+        // 12 click send comment button:
         driver.findElement(cssSelector(".form-group > .btn")).click();
 
-        // **Wait for an element that confirms the page is fully loaded**
+        // 13 Wait for an element that confirms the page is fully loaded**
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".form-group > .btn")));
 
-        // Scroll up after wait
+        // 14 Scroll up after wait
         js.executeScript("window.scrollBy(0, -400);");
 
-        // **Wait for the "Show Comments" button to be clickable after scroll**
+        // 15 Wait for the "Show Comments" button to be clickable after scroll**
         WebElement showCommentField = wait.until(ExpectedConditions.elementToBeClickable(
                 By.xpath("//*[text()='Show Comments']")));
         showCommentField.click();

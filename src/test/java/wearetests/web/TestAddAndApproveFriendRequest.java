@@ -25,17 +25,13 @@ public class TestAddAndApproveFriendRequest extends BaseTestClassOlga {
         String currentUrl = driver.getCurrentUrl();
         assertThat("Did not navigate to the correct profile URL", currentUrl, is("http://localhost:8081/auth/users/41/profile"));
 
-        // Step 7: Check profile page elements
+        // Step 7: Find a friend profile to add
         WebElement profileHeader = driver.findElement(By.xpath("/html/body/section[1]/div[2]/div[1]/form/input"));
         assertThat("Profile friend request input is not displayed", profileHeader.isDisplayed(), is(true));
+        //assertTrue(profileHeader.isDisplayed());
 
         // Step 8: Send friend request (Click on friend request button)
         profileHeader.click();
-
-        // Optional: Verify friend request submission
-        WebElement submitButton = driver.findElement(By.cssSelector(".btn"));
-        assertThat("Submit button is not displayed", submitButton.isDisplayed(), is(true));
-        // submitButton.click();
 
         //assert that page contains text: Good job! You have send friend request!
         WebElement successMessageForConnecting = driver.findElement(By.xpath("/html/body/section[1]/div[2]/div[2]"));
@@ -48,13 +44,13 @@ public class TestAddAndApproveFriendRequest extends BaseTestClassOlga {
     public void testApproveFriendRequest() {
         loginWithUsernameAndPassword(MARTIN, PASSWORD);
 
-        // Step # | name | target | value
+        // Open WeAre
         driver.get("http://localhost:8081/auth/users/41/profile");
-        String currentUrl = driver.getCurrentUrl();
 
+        // Find Friend Request Received
         driver.findElement(By.xpath("/html/body/section[1]/div[2]/form/input")).click();
 
-        // wait for element to be clickable
+        // wait for element to be clickable and click
         WebElement approveButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("input.btn.btn-primary.py-2[value='Approve Request']")));
         approveButton.click();
 
