@@ -10,7 +10,7 @@ public class PostLikeDislikeTest extends WEareBaseWebTest {
 
 
     @Test
-    public void postLike () {
+    public void click_like_lost () {
         authenticateWithUser(TestData.ADMIN_PROFILE.getValue());
         adminHeader.viewLatestPosts();
         loggedPostsPage.clickLike();
@@ -18,7 +18,7 @@ public class PostLikeDislikeTest extends WEareBaseWebTest {
     }
 
     @Test
-    public void postDisLike () {
+    public void click_disLike_post () {
         authenticateWithUser(TestData.ADMIN_PROFILE.getValue());
         adminHeader.viewLatestPosts();
         loggedPostsPage.clickDislike();

@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Test;
 import wearetests.core.WEareBaseWebTest;
 import wearetests.enums.TestData;
 
-public class DeleteCommentTest extends WEareBaseWebTest {
+public class DeleteCommentAndPostTest extends WEareBaseWebTest {
 
     @Test
-    public void deleteCommentTest() {
+    public void commentIsDeleted_when_confirmed() {
         authenticateWithUser(TestData.ADMIN_PROFILE.getValue());
         adminHeader.viewLatestPosts();
         loggedPostsPage.explorePost();
@@ -16,5 +16,15 @@ public class DeleteCommentTest extends WEareBaseWebTest {
         explorePostPage.deleteComment();
         deleteConfirmationPage.confirmCommentDeletion();
         Assertions.assertTrue(deleteConfirmationPage.isCommentDeletedSuccessfullyVisible());
+    }
+
+    @Test
+    public void postIsDeleted_when_confirmed() {
+        authenticateWithUser(TestData.ADMIN_PROFILE.getValue());
+        baseHeader.viewLatestPosts();
+        loggedPostsPage.explorePost();
+        explorePostPage.clickDeletePostButton();
+        deleteConfirmationPage.confirmPostDeletion();
+        Assertions.assertTrue(deleteConfirmationPage.isPostDeletedSuccessfullyVisible());
     }
 }
