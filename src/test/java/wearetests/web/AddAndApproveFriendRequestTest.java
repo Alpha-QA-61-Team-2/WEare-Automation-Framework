@@ -6,14 +6,14 @@ import wearetests.enums.TestData;
 
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class TestAddAndApproveFriendRequest extends WEareBaseWebTest {
+public class AddAndApproveFriendRequestTest extends WEareBaseWebTest {
 
     public static final String ERROR_MESSAGE_FOR_APPROVING_FRIEND_REQUEST = "There are no friend requests to approve!";
     public static final String ERROR_MESSAGE_FOR_SENDING_FRIEND_REQUEST = "Friend request send message should be displayed but is not!.";
 
     @Test
     @Order(1)
-    public void testAddFriend() {
+    public void friendRequestSent_when_validCredentialsProvided() {
         authenticateWithUser(TestData.USER_1.getValue());
         homePage.selectUser();
         profilePage.sendConnectionRequest();
@@ -22,7 +22,7 @@ public class TestAddAndApproveFriendRequest extends WEareBaseWebTest {
 
     @Test
     @Order(2)
-    public void testApproveFriendRequest() {
+    public void friendRequestApproved_when_validCredentialsProvided() {
         authenticateWithUser(TestData.USER_3.getValue());
         homePage.selectPersonalProfile();
         personalProfilePage.seeNewFriendRequests();
