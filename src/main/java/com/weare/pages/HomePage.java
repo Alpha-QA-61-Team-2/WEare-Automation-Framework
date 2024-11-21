@@ -24,7 +24,8 @@ public class HomePage extends BaseHeader {
     protected final By professionField = By.id("searchParam1");
     protected final By nameField = By.id("searchParam2");
     protected final By searchBtn = By.cssSelector("button[type=submit]");
-    protected final By userProfileBtn = By.xpath("//h2[@type='text']");
+    protected final By userProfileBtn = By.xpath("/html/body/section[4]/div[2]/div/div/div/div[1]/div/div[2]/div/div/a/h2");
+    protected final By personalProfileBtn = By.xpath("//*[@id=\"ftco-nav\"]/ul/li[5]/a");
 
     public void selectUser() {
         JavascriptExecutor js = (JavascriptExecutor) driver().getWebDriver();
@@ -32,4 +33,7 @@ public class HomePage extends BaseHeader {
         driver().findElement(userProfileBtn).click();
     }
 
+    public void selectPersonalProfile() {
+        driver().findElement(personalProfileBtn).click();
+    }
 }

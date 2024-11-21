@@ -11,4 +11,8 @@ public class PersonalProfilePage extends LoggedHeader {
     public void openEditor() {
         driver().findElement(editProfileBtn).click();
     }
+
+    public void seeNewFriendRequests() {
+        driver().findElement(friendRequestsBtn).click();
+    }
 }
