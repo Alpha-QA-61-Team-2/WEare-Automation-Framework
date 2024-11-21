@@ -8,5 +8,5 @@ public class AnonPostsPage extends AnonHeader {
     protected final By explorePostBtn = By.xpath("//a[contains(text(),'Explore')]");
     protected final By seeProfileBtn = By.xpath("//a[contains(text(),'profile')]");
     protected final By categorySelect = By.id("name");
-    protected final By browseCategoryBtn = By.xpath("(//input[@value='Browse'])");
+    protected final By browseCategoryBtn = By.xpath("//input[@value='Browse']");
 }

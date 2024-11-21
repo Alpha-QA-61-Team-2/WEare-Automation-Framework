@@ -1,6 +1,6 @@
 {
   "authorities": [
-    "ROLE_АDMIN"
+    "ROLE_USER"
   ],
   "category": {
     "id": 110,
@@ -9,5 +9,5 @@
   "confirmPassword": "111111",
   "email": "api@mail.bg",
   "password": "111111",
-  "username": "newadmin"
+  "username": "t"
 }
