@@ -4,8 +4,7 @@ import org.junit.jupiter.api.*;
 import wearetests.core.WEareBaseWebTest;
 import wearetests.enums.TestData;
 
-import static com.weare.pages.IndividualPostPage.PIXELS_DOWN_2500;
-import static com.weare.pages.IndividualPostPage.PIXELS_UP;
+import static com.weare.pages.ExplorePostPage.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -43,26 +42,25 @@ public class CreatePostAndCommentTest extends WEareBaseWebTest {
         loggedPostsPage.explorePost();
 
         //scroll down:
-        individualPostPage.scrollByPixels(PIXELS_DOWN_2500);
-        //individualPostPage.scrollDown();
+        explorePostPage.scrollByPixels(PIXELS_DOWN_2500);
 
         //fill text in comment field and submit:
-        individualPostPage.fillTextInCommentField();
-        individualPostPage.submitComment();
+        explorePostPage.fillTextInCommentField();
+        explorePostPage.submitComment();
 
         //scroll up:
-        individualPostPage.scrollByPixels(PIXELS_UP);
+        explorePostPage.scrollByPixels(PIXELS_UP_800);
 
         // click show comments button:
-        individualPostPage.showCommentsButton();
+        explorePostPage.viewComments();
 
         //  Assert that the date in the meta element contains today’s date
-        assertTrue(individualPostPage.isDateOfThePostCorrect(), ERROR_MESSAGE_FOR_DATE_ASSERT);
+        assertTrue(explorePostPage.isDateOfThePostCorrect(), ERROR_MESSAGE_FOR_DATE_ASSERT);
 
         //  Assert that the comment text matches what was entered
-        assertTrue(individualPostPage.isTextCorrect(), ERROR_MESSAGE_FOR_COMMENT_CONTENT);
+        assertTrue(explorePostPage.isTextCorrect(), ERROR_MESSAGE_FOR_COMMENT_CONTENT);
 
         //  Assert that the username is displayed correctly
-        assertTrue(individualPostPage.isUsernameCorrectlyDisplayed(TestData.USER_1.getValue()), ERROR_MESSAGE_FOR_USERNAME);
+        assertTrue(explorePostPage.isUsernameCorrectlyDisplayed(TestData.USER_1.getValue()), ERROR_MESSAGE_FOR_USERNAME);
     }
 }

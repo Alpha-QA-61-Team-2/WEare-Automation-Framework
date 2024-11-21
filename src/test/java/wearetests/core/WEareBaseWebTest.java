@@ -32,7 +32,6 @@ public class WEareBaseWebTest extends BaseWebTest {
     protected ProfileEditorPage profileEditorPage;
     protected RegistrationPage registrationPage;
     protected OtherUserProfilePage profilePage;
-    protected IndividualPostPage individualPostPage;
 
     @BeforeEach
     public void beforeTests() {
@@ -53,7 +52,6 @@ public class WEareBaseWebTest extends BaseWebTest {
         this.profileEditorPage = new ProfileEditorPage();
         this.registrationPage = new RegistrationPage();
         this.profilePage = new OtherUserProfilePage();
-        this.individualPostPage = new IndividualPostPage();
 
         // Navigate to base page
         driver().get(PropertiesManager.getConfigProperties().getProperty("weareBaseUrl"));
