@@ -18,11 +18,11 @@ public class ExplorePostPage extends LoggedHeader {
     protected final By seeProfileBtn = By.linkText("See profile");
 
     protected final By showCommentsBtn = By.xpath("//button[contains(text(),'Comments')]");
-    protected final By editCommentBtn = By.linkText("Edit comment");
-    protected final By deleteCommentBtn = By.linkText("Delete comment");
+    protected final By editCommentBtn = By.linkText("EDIT COMMENT");
+    protected final By deleteCommentBtn = By.linkText("DELETE COMMENT");
     protected final By commentTextField = By.id("message");
     protected final By postCommentBtn = By.cssSelector("input[value*='Post']");
-
+    protected final By editCommentSubmitBtn = By.cssSelector("input[value*='Edit Comment']");
     protected final By locatorOfCreatedComment = By.xpath("//*[@id=\"comments\"]/div[2]/h3");
     protected final By locatorOfContentOfComment = By.cssSelector("#comments > div.comment-body > p:nth-child(3)");
     protected final By locatorOfDateOfComment = By.className("meta");
@@ -39,6 +39,10 @@ public class ExplorePostPage extends LoggedHeader {
         driverWait().until(ExpectedConditions.visibilityOfElementLocated(deletePostBtn));
         driver().findElement(deletePostBtn).click();
     }
+    public void clickEditPostButton() {
+        driverWait().until(ExpectedConditions.visibilityOfElementLocated(editPostBtn));
+        driver().findElement(editPostBtn).click();
+    }
 
     public void viewComments() {
         driver().findElement(showCommentsBtn).click();
@@ -46,9 +50,17 @@ public class ExplorePostPage extends LoggedHeader {
 
     //todo fix
     public void deleteComment() {
-        JavascriptExecutor js = (JavascriptExecutor) driver();
-        js.executeScript("arguments[0].scrollIntoView(true);", deleteCommentBtn);
+        driverWait().until(ExpectedConditions.visibilityOfElementLocated(deleteCommentBtn));
         driver().findElement(deleteCommentBtn).click();
+    }
+    public void editComment() {
+        driverWait().until(ExpectedConditions.visibilityOfElementLocated(editCommentBtn));
+        driver().findElement(editCommentBtn).click();
+    }
+
+    public void editCommentSubmit() {
+        driverWait().until(ExpectedConditions.visibilityOfElementLocated(editCommentSubmitBtn));
+        driver().findElement(editCommentSubmitBtn).click();
     }
 
     public void scrollByPixels(int px) {
@@ -83,6 +95,15 @@ public class ExplorePostPage extends LoggedHeader {
         WebElement commentTextElement = driver().findElement(locatorOfContentOfComment);
         return commentTextElement.getText().contains(BODY_OF_THE_COMMENT);
     }
+    public boolean isCommentTextCorrect() {
+        WebElement commentTextElement = driver().findElement(locatorOfContentOfComment);
+        return commentTextElement.getText().contains(BODY_OF_THE_COMMENT);
+    }
+    public boolean isTextPresentOnPage() {
+        String pageSource = driver().getPageSource();
+        return pageSource.contains(BODY_OF_THE_COMMENT);
+    }
+
 }
 
 

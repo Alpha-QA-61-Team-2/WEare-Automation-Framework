@@ -17,8 +17,7 @@ public class WEareApi extends BaseApiService {
                 given()
                         .contentType(ContentType.JSON)
                         .baseUri(getServiceUrl())
-// Uncomment to set authentication cookie from resources
-//                .cookie("JSESSIONID", PropertiesManager.getConfigProperties().getProperty(String.format("%s.apikey", username)))
+               .cookie("JSESSIONID", PropertiesManager.getConfigProperties().getProperty(String.format("%s.apikey", username)))
         );
     }
 }

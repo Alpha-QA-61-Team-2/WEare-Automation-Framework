@@ -14,6 +14,8 @@ import testframework.PropertiesManager;
 import testframework.core.BaseWebTest;
 import wearetests.enums.TestData;
 
+import static com.weare.pages.ExplorePostPage.PIXELS_DOWN_2500;
+
 public class WEareBaseWebTest extends BaseWebTest {
 
     protected AdminHeader adminHeader;
@@ -78,6 +80,14 @@ public class WEareBaseWebTest extends BaseWebTest {
     public void authenticateWithUser(String username) {
         anonHeader.clickSignIn();
         loginPage.submitLoginForm(username, TestData.PASSWORD.getValue());
+    }
+    public void writeAComment() {
+        authenticateWithUser(TestData.ADMIN_PROFILE.getValue());
+        loggedHeader.viewLatestPosts();
+        loggedPostsPage.explorePost();
+        explorePostPage.scrollByPixels(PIXELS_DOWN_2500);
+        explorePostPage.fillTextInCommentField();
+        explorePostPage.submitComment();
     }
 }
 
