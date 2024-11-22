@@ -45,6 +45,7 @@ public class ExplorePostPage extends LoggedHeader {
     }
 
     public void viewComments() {
+        driver().scrollToElement(showCommentsBtn);
         driver().findElement(showCommentsBtn).click();
     }
 
@@ -63,13 +64,14 @@ public class ExplorePostPage extends LoggedHeader {
         driver().findElement(editCommentSubmitBtn).click();
     }
 
-    public void scrollByPixels(int px) {
+    //todo remove if tests work without it
+    /*public void scrollByPixels(int px) {
         JavascriptExecutor js = (JavascriptExecutor) driver().getWebDriver();
         js.executeScript("window.scrollBy(0, " + px + ");");
-    }
+    }*/
 
     public void fillTextInCommentField() {
-        scrollByPixels(PIXELS_UP_400);
+        driver().scrollToElement(commentTextField);
         driver().findElement(commentTextField).click();
         driver().findElement(commentTextField).sendKeys(BODY_OF_THE_COMMENT);
     }
@@ -79,7 +81,7 @@ public class ExplorePostPage extends LoggedHeader {
     }
 
     public boolean isUsernameCorrectlyDisplayed(String username) {
-        scrollByPixels(PIXELS_DOWN_400);
+        driver().scrollToElement(locatorOfCreatedComment);
         WebElement usernameField = driver().findElement(locatorOfCreatedComment);
         String field = usernameField.getText().toLowerCase();
         return field.equals(username);

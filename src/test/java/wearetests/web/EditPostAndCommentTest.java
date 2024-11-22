@@ -19,7 +19,6 @@ public class EditPostAndCommentTest extends WEareBaseWebTest {
         explorePostPage.editComment();
         explorePostPage.fillTextInCommentField();
         explorePostPage.editCommentSubmit();
-        explorePostPage.scrollByPixels(-2000);
         explorePostPage.viewComments();
         Assertions.assertTrue(explorePostPage.isCommentTextCorrect());
     }

@@ -41,15 +41,9 @@ public class CreatePostAndCommentTest extends WEareBaseWebTest {
         homePage.clickLatestPost();
         loggedPostsPage.explorePost();
 
-        //scroll down:
-        explorePostPage.scrollByPixels(PIXELS_DOWN_2500);
-
         //fill text in comment field and submit:
         explorePostPage.fillTextInCommentField();
         explorePostPage.submitComment();
-
-        //scroll up:
-        explorePostPage.scrollByPixels(PIXELS_UP_800);
 
         // click show comments button:
         explorePostPage.viewComments();

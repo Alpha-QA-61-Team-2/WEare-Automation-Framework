@@ -29,10 +29,8 @@ public class HomePage extends BaseHeader {
     protected final By addNewPostBtn = By.xpath("//*[@id=\"ftco-nav\"]/ul/li[8]/a");
     protected final By latestPostField = By.xpath("//*[@id=\"ftco-nav\"]/ul/li[6]/a");
 
-    //todo move method to a parent class for reuse
     public void selectUser() {
-        JavascriptExecutor js = (JavascriptExecutor) driver().getWebDriver();
-        js.executeScript("window.scrollBy(0, 2500);");
+        driver().scrollToElement(userProfileBtn);
         driver().findElement(userProfileBtn).click();
     }
     //todo remove below methods since they exist in LoggedHeader

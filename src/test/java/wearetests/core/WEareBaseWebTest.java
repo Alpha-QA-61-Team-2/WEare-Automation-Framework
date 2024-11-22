@@ -85,7 +85,6 @@ public class WEareBaseWebTest extends BaseWebTest {
         authenticateWithUser(TestData.ADMIN_PROFILE.getValue());
         loggedHeader.viewLatestPosts();
         loggedPostsPage.explorePost();
-        explorePostPage.scrollByPixels(PIXELS_DOWN_2500);
         explorePostPage.fillTextInCommentField();
         explorePostPage.submitComment();
     }

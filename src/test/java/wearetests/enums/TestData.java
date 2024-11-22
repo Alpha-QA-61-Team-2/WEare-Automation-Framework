@@ -31,12 +31,6 @@ public enum TestData {
     }
 
 
-    //todo maybe remove below
-    @Override
-    public String toString() {
-        return value;
-    }
-
     /*public static final int USERNAME_LENGTH = 3;
     private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";*/
 

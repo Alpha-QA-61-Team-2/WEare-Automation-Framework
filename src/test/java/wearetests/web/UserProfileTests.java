@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class UserProfileTests extends WEareBaseWebTest {
 
-    //todo find a way to make tests run together
+    //todo check again
 
     @Test
     public void userCreated_when_validDataProvided() {
@@ -43,7 +43,7 @@ public class UserProfileTests extends WEareBaseWebTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = { "a", "VThyJLiSFuAAAIYEkRGDB" })
+    @ValueSource(strings = { "a", "VThyJLiSFuAAAIYEkRGDBа" })
     public void userNotCreated_when_providingInvalidUsername(String username) {
         anonHeader.clickRegister();
         registrationPage.submitRegistrationForm(username, TestData.EMAIL.getValue(), TestData.PASSWORD.getValue()
