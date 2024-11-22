@@ -4,7 +4,6 @@ import org.junit.jupiter.api.*;
 import wearetests.core.WEareBaseWebTest;
 import wearetests.enums.TestData;
 
-import static com.weare.pages.ExplorePostPage.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -21,7 +20,7 @@ public class CreatePostAndCommentTest extends WEareBaseWebTest {
         //1 login
         authenticateWithUser(TestData.USER_1.getValue());
         // 2 find element post in navigation bar and click it:
-        homePage.clickAddNewPost();
+        loggedHeader.clickAddNewPost();
         // 3 Scroll down:
         postCreationEditPage.scrollDown();
         // 4 select public post and fill body of the post:
@@ -38,7 +37,7 @@ public class CreatePostAndCommentTest extends WEareBaseWebTest {
         authenticateWithUser(TestData.USER_1.getValue());
 
         // find latest posts
-        homePage.clickLatestPost();
+        loggedHeader.clickLatestPost();
         loggedPostsPage.explorePost();
 
         //fill text in comment field and submit:

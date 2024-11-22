@@ -24,7 +24,7 @@ public class AddAndApproveFriendRequestTest extends WEareBaseWebTest {
     @Order(2)
     public void friendRequestApproved_when_validCredentialsProvided() {
         authenticateWithUser(TestData.USER_3.getValue());
-        homePage.selectPersonalProfile();
+        loggedHeader.goToPersonalProfile();
         personalProfilePage.seeNewFriendRequests();
         connectionRequestsPage.approveFriendRequest();
         Assertions.assertTrue(connectionRequestsPage.isSuccessMsgDisplayed(), ERROR_MESSAGE_FOR_APPROVING_FRIEND_REQUEST);

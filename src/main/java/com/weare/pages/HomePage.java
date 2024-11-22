@@ -25,9 +25,6 @@ public class HomePage extends BaseHeader {
     protected final By nameField = By.id("searchParam2");
     protected final By searchBtn = By.cssSelector("button[type=submit]");
     protected final By userProfileBtn = By.xpath("/html/body/section[4]/div[2]/div/div/div/div[1]/div/div[2]/div/div/a/h2");
-    protected final By personalProfileBtn = By.xpath("//*[@id=\"ftco-nav\"]/ul/li[5]/a");
-    protected final By addNewPostBtn = By.xpath("//*[@id=\"ftco-nav\"]/ul/li[8]/a");
-    protected final By latestPostField = By.xpath("//*[@id=\"ftco-nav\"]/ul/li[6]/a");
 
     public void selectUser() {
         driver().scrollToElement(userProfileBtn);
@@ -38,16 +35,4 @@ public class HomePage extends BaseHeader {
         driver().get(url);
     }
 
-    //todo remove below methods since they exist in LoggedHeader
-    public void selectPersonalProfile() {
-        driver().findElement(personalProfileBtn).click();
-    }
-
-    public void clickAddNewPost() {
-        driver().findElement(addNewPostBtn).click();
-    }
-
-    public void clickLatestPost() {
-        driver().findElement(latestPostField).click();
-    }
 }
