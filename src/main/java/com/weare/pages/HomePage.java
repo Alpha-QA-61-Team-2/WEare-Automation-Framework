@@ -33,6 +33,11 @@ public class HomePage extends BaseHeader {
         driver().scrollToElement(userProfileBtn);
         driver().findElement(userProfileBtn).click();
     }
+    public void goToUserPage() {
+        String url = "http://localhost:8081/auth/users/43/profile";
+        driver().get(url);
+    }
+
     //todo remove below methods since they exist in LoggedHeader
     public void selectPersonalProfile() {
         driver().findElement(personalProfileBtn).click();
