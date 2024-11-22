@@ -35,18 +35,19 @@ public class WEareBaseApiTest extends BaseApiTest {
     @BeforeAll
     public static void beforeAll() {
         // perform some code before all tests start
-        Response loginResponse = given()
+        RestAssured.baseURI = PropertiesManager.getConfigProperties().getProperty("weareBaseUrl");
+
+        /*Response loginResponse = given()
                 .config(RestAssured.config().encoderConfig(encoderConfig()
                         .encodeContentTypeAs("multipart/form-data", ContentType.TEXT)))
                 .header("Content-Type"
                         , "multipart/form-data; boundary=<calculated when request is sent>")
-                .formParam("username", "newadmin")
-                .formParam("password", "111111")
-                .baseUri(PropertiesManager.getConfigProperties().getProperty("weareBaseUrl"))
+                .formParam("username", "milko")
+                .formParam("password", "123456")
                 .post("/authenticate");
         sessionCookie = loginResponse.getCookie("JSESSIONID");
         System.out.println("Login response status: " + loginResponse.getStatusCode());
-        System.out.println("Session cookie: " + sessionCookie);
+        System.out.println("Session cookie: " + sessionCookie);*/
     }
 
 

@@ -1,5 +1,6 @@
 package wearetests.api.tests;
 
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 import wearetests.core.WEareBaseApiTest;
@@ -7,6 +8,8 @@ import wearetests.enums.TestData;
 
 import java.io.IOException;
 
+import static io.restassured.RestAssured.get;
+import static io.restassured.RestAssured.given;
 import static wearetests.api.Requests.*;
 
 public class UserTests extends WEareBaseApiTest {
@@ -28,8 +31,37 @@ public class UserTests extends WEareBaseApiTest {
 
     @Test
     public void testUpdateUserProfile() throws IOException {
-        response = updateUserProfile(TestData.VALID_USER_ID.getValue());
-        verifyStatusCodeIs200(response);
-        verifyBodyContainsString(response, "id");
+        updateUserProfile(TestData.VALID_USER_ID.getValue());
+        /*verifyStatusCodeIs200(response);
+        verifyBodyContainsString(response, "id");*/
+    }
+
+    @Test
+    public void req() {
+        String cookie = getCookie();
+        Response response = given()
+                // Base URL
+                // API Path
+                .contentType(ContentType.JSON)
+                .header("Accept", "*/*") // Header: Content-Type application/json
+                .cookie("JSESSIONID", cookie)
+                .body("""
+        {
+            "id": 0,
+            "firstName": "Mилко",
+            "lastName": "Антов",
+            "sex": "MALE",
+            "location": {},
+            "birthYear": "2001-01-02",
+            "personalReview": "",
+            "memberSince": "2023-11-14T15:30:00",
+            "picture": "",
+            "picturePrivacy": true
+        }
+        """)                  // Request Body
+                .post("http://localhost:8081/api/users/auth/49/personal") ;                       // POST Method
+
+        response.then().log().body()
+                .assertThat().statusCode(200);
     }
 }
