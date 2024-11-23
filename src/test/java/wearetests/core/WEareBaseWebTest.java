@@ -73,8 +73,8 @@ public class WEareBaseWebTest extends BaseWebTest {
 
     @AfterAll
     public static void afterAll() {
-        System.out.println("afterAll logic performed after a test class:");
-        DatabaseReset.resetDatabase();
+        //System.out.println("afterAll logic performed after a test class:");
+        //DatabaseReset.resetDatabase();
     }
 
     // Extract methods that use multiple pages
