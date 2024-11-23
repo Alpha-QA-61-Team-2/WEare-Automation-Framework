@@ -12,9 +12,8 @@ import org.junit.jupiter.api.BeforeEach;
 
 import testframework.PropertiesManager;
 import testframework.core.BaseWebTest;
+import wearetests.DatabaseReset;
 import wearetests.enums.TestData;
-
-import static com.weare.pages.ExplorePostPage.PIXELS_DOWN_2500;
 
 public class WEareBaseWebTest extends BaseWebTest {
 
@@ -61,7 +60,8 @@ public class WEareBaseWebTest extends BaseWebTest {
 
     @BeforeAll
     public static void beforeAll() {
-        // perform some code before all tests start
+        System.out.println("beforeAll logic performed before a test class:");
+        DatabaseReset.resetDatabase();
     }
 
     // close driver
@@ -73,7 +73,8 @@ public class WEareBaseWebTest extends BaseWebTest {
 
     @AfterAll
     public static void afterAll() {
-        // perform some code after all tests have finished
+        System.out.println("afterAll logic performed after a test class:");
+        DatabaseReset.resetDatabase();
     }
 
     // Extract methods that use multiple pages
