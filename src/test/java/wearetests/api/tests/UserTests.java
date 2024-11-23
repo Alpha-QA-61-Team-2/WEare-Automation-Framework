@@ -1,67 +1,47 @@
 package wearetests.api.tests;
 
-import io.restassured.http.ContentType;
+
 import io.restassured.response.Response;
+import org.junit.Assert;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
 import wearetests.core.WEareBaseApiTest;
-import wearetests.enums.TestData;
+
 
 import java.io.IOException;
 
-import static io.restassured.RestAssured.get;
-import static io.restassured.RestAssured.given;
-import static wearetests.api.Requests.*;
+import static wearetests.api.requests.UserRequests.*;
 
 public class UserTests extends WEareBaseApiTest {
 
-    private static Response response;
+    private static String userId;
+    private static Response registerResponse;
 
+    //todo find a way to pass newly registered user's creds to getCookie method in WEareApi
+    @BeforeAll
+    public static void setup() throws IOException {
+        registerResponse = registerUser();
+        userId = registerResponse.getBody().asString().split(" ")[6];
+    }
+
+    //todo fix below so that it can run multiple times
     @Test
     public void testUserRegistration() throws IOException {
-        response = registerUser();
-        verifyStatusCodeIs200(response);
-        verifyBodyContainsString(response, REGISTRATION_CONFIRM_STRING);
+        verifyStatusCodeIs200(registerResponse);
+        verifyBodyContainsString(registerResponse, REGISTRATION_CONFIRM_STRING);
     }
 
     @Test
     public void testGetUserById() {
-        response = getUserById(TestData.VALID_USER_ID.getValue());
+        Response response = getUserById("userId");
         verifyStatusCodeIs200(response);
     }
 
     @Test
     public void testUpdateUserProfile() throws IOException {
-        updateUserProfile(TestData.VALID_USER_ID.getValue());
-        /*verifyStatusCodeIs200(response);
-        verifyBodyContainsString(response, "id");*/
-    }
-
-    @Test
-    public void req() {
-        String cookie = getCookie();
-        Response response = given()
-                // Base URL
-                // API Path
-                .contentType(ContentType.JSON)
-                .header("Accept", "*/*") // Header: Content-Type application/json
-                .cookie("JSESSIONID", cookie)
-                .body("""
-        {
-            "id": 0,
-            "firstName": "Mилко",
-            "lastName": "Антов",
-            "sex": "MALE",
-            "location": {},
-            "birthYear": "2001-01-02",
-            "personalReview": "",
-            "memberSince": "2023-11-14T15:30:00",
-            "picture": "",
-            "picturePrivacy": true
-        }
-        """)                  // Request Body
-                .post("http://localhost:8081/api/users/auth/49/personal") ;                       // POST Method
-
-        response.then().log().body()
-                .assertThat().statusCode(200);
+       Response response = updateUserProfile(userId);
+        verifyStatusCodeIs200(response);
+        Assert.assertNotNull(response.jsonPath().get("id"));
     }
 }

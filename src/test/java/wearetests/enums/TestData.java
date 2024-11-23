@@ -5,12 +5,12 @@ import java.util.UUID;
 
 public enum TestData {
 
-    ADMIN_PROFILE("admina"),
+    ADMIN_PROFILE("admin"),
     USER_1("olga"),
     USER_2("martin"),
     USER_3("milko"),
     VALID_USER_ID("43"),
-    USERNAME_CREATE("user"),
+    USERNAME_CREATE("ussser"),
     EMAIL("rndm@abv.com"),
     PASSWORD("123456"),
     CONFIRM_PASSWORD("123456"),

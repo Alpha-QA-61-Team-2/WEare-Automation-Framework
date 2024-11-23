@@ -5,14 +5,12 @@ import org.junit.jupiter.api.Test;
 import wearetests.core.WEareBaseWebTest;
 import wearetests.enums.TestData;
 
-import static com.weare.pages.ExplorePostPage.PIXELS_DOWN_2500;
-
-
 public class EditPostAndCommentTest extends WEareBaseWebTest {
 
     @Test
     public void commentIsEdited_when_confirmed() {
-        writeAComment();
+        createComment();
+        authenticateWithUser(TestData.ADMIN_PROFILE.getValue());
         adminHeader.viewLatestPosts();
         loggedPostsPage.explorePost();
         explorePostPage.viewComments();
@@ -23,6 +21,8 @@ public class EditPostAndCommentTest extends WEareBaseWebTest {
         Assertions.assertTrue(explorePostPage.isCommentTextCorrect());
     }
 
+
+    //todo test fails if first post is private
     @Test
     public void postIsEdited_when_confirmed() {
         authenticateWithUser(TestData.ADMIN_PROFILE.getValue());
@@ -32,7 +32,6 @@ public class EditPostAndCommentTest extends WEareBaseWebTest {
         explorePostPage.fillTextInCommentField();
         postCreationEditPage.submitPost();
         Assertions.assertTrue(explorePostPage.isTextPresentOnPage());
-}
-
+    }
 }
 

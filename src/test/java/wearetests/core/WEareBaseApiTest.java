@@ -8,8 +8,11 @@ import lombok.Getter;
 import org.junit.jupiter.api.*;
 import testframework.PropertiesManager;
 import testframework.core.BaseApiTest;
-import wearetests.api.Requests;
+import wearetests.api.requests.PostRequests;
+import wearetests.api.requests.UserRequests;
 import wearetests.enums.TestData;
+
+import java.io.IOException;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.config.EncoderConfig.encoderConfig;
@@ -20,11 +23,8 @@ public class WEareBaseApiTest extends BaseApiTest {
     public static final int EXPECTED_STATUS_CODE = 200;
     public static final String REGISTRATION_CONFIRM_STRING = "was created";
 
-    @Getter
-    private static String sessionCookie;
-
     @BeforeEach
-    public void beforeTests() {
+    public void beforeTests() throws IOException {
         // perform some code before each test starts
         EncoderConfig encoderConfig = RestAssured.config().getEncoderConfig()
                 .appendDefaultContentCharsetToContentTypeIfUndefined(false);
@@ -36,18 +36,6 @@ public class WEareBaseApiTest extends BaseApiTest {
     public static void beforeAll() {
         // perform some code before all tests start
         RestAssured.baseURI = PropertiesManager.getConfigProperties().getProperty("weareBaseUrl");
-
-        /*Response loginResponse = given()
-                .config(RestAssured.config().encoderConfig(encoderConfig()
-                        .encodeContentTypeAs("multipart/form-data", ContentType.TEXT)))
-                .header("Content-Type"
-                        , "multipart/form-data; boundary=<calculated when request is sent>")
-                .formParam("username", "milko")
-                .formParam("password", "123456")
-                .post("/authenticate");
-        sessionCookie = loginResponse.getCookie("JSESSIONID");
-        System.out.println("Login response status: " + loginResponse.getStatusCode());
-        System.out.println("Session cookie: " + sessionCookie);*/
     }
 
 

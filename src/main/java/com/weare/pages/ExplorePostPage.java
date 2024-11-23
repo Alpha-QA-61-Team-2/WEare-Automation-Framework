@@ -2,7 +2,6 @@ package com.weare.pages;
 
 import com.weare.pages.header.LoggedHeader;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -28,10 +27,6 @@ public class ExplorePostPage extends LoggedHeader {
     protected final By locatorOfDateOfComment = By.className("meta");
 
     protected static final String BODY_OF_THE_COMMENT = "this is a test comment to test the comment send functionality";
-    public static final int PIXELS_UP_400 = -400;
-    public static final int PIXELS_UP_800 = -800;
-    public static final int PIXELS_DOWN_400 = 400;
-    public static final int PIXELS_DOWN_2500 = 2500;
     protected static final String DATE_FORMAT = "dd/MM/yyyy";
 
 
@@ -39,6 +34,7 @@ public class ExplorePostPage extends LoggedHeader {
         driverWait().until(ExpectedConditions.visibilityOfElementLocated(deletePostBtn));
         driver().findElement(deletePostBtn).click();
     }
+
     public void clickEditPostButton() {
         driverWait().until(ExpectedConditions.visibilityOfElementLocated(editPostBtn));
         driver().findElement(editPostBtn).click();
@@ -54,6 +50,7 @@ public class ExplorePostPage extends LoggedHeader {
         driverWait().until(ExpectedConditions.visibilityOfElementLocated(deleteCommentBtn));
         driver().findElement(deleteCommentBtn).click();
     }
+
     public void editComment() {
         driverWait().until(ExpectedConditions.visibilityOfElementLocated(editCommentBtn));
         driver().findElement(editCommentBtn).click();
@@ -97,10 +94,12 @@ public class ExplorePostPage extends LoggedHeader {
         WebElement commentTextElement = driver().findElement(locatorOfContentOfComment);
         return commentTextElement.getText().contains(BODY_OF_THE_COMMENT);
     }
+
     public boolean isCommentTextCorrect() {
         WebElement commentTextElement = driver().findElement(locatorOfContentOfComment);
         return commentTextElement.getText().contains(BODY_OF_THE_COMMENT);
     }
+
     public boolean isTextPresentOnPage() {
         String pageSource = driver().getPageSource();
         return pageSource.contains(BODY_OF_THE_COMMENT);

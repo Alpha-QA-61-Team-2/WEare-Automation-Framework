@@ -1,6 +1,7 @@
 package com.weare.api;
 
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import testframework.PropertiesManager;
 import testframework.core.BaseApiService;
 
@@ -12,12 +13,16 @@ public class WEareApi extends BaseApiService {
         super(path, PropertiesManager.getConfigProperties().getProperty("weareBaseUrl"));
     }
 
-    public void authenticate(String username){
-        setRequestSpecification(
-                given()
-                        .contentType(ContentType.JSON)
-                        .baseUri(getServiceUrl())
-               .cookie("JSESSIONID", PropertiesManager.getConfigProperties().getProperty(String.format("%s.apikey", username)))
-        );
+    public static String getCookie() {
+        Response loginResponse = given()
+                .baseUri("http://localhost:8081/")
+                .formParam("username", "milko")
+                .formParam("password", "111111")
+                .post("/authenticate");
+
+        return loginResponse.then()
+                .statusCode(302) // Assert the status code is 200
+                .extract()
+                .cookie("JSESSIONID");
     }
 }
