@@ -1,0 +1,65 @@
+За да ползвате опцията за ресетване на база, е нужно преди да ръннете тестовете, да направите следното:
+
+
+- спрете всички контейнери в докер;
+- изтрийте всички контейнери, volumes, builds в докер;
+- в приложението weareapp(не нашето тестерско, а другото, с кода на проекта), актуализирайте
+    docker-compose.yml, като замените съдържанието му със следното, като преди това,
+    променете парола, узернейм, както и портовете, според вашите индивидуални такива!
+
+    "
+            version: "3.8"
+            services:
+              client:
+                build: ../app
+                image: weare-app
+                container_name: weare-app
+                ports:
+                  - "8081:8081"
+                depends_on:
+                  - maria_db
+                networks:
+                  - app-network
+
+              maria_db:
+                build: ../database
+                image: weare-mariadb
+                container_name: weare-mariadb
+                ports:
+                  - 3307:3306
+                networks:
+                  - app-network
+                environment:
+                  MYSQL_ROOT_PASSWORD: password
+                  MYSQL_DATABASE: weare-mariadb
+                  MYSQL_USER: username
+                  MYSQL_PASSWORD: password
+                healthcheck:
+                  test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+                  interval: 10s
+                  timeout: 5s
+                  retries: 5
+                  start_period: 30s
+
+            networks:
+              app-network:
+                name: project-weare
+
+                "
+
+    -стартирайте този скрипт в intellij, което ще ви направи нови контейнери в докер;
+
+
+    -последно, преди да стартирате тестовете, в web папката, коригирайте и следните параметри,
+    във файл: src/test/java/wearetests/DatabaseReset.java
+
+        //use your individual parameters for user, pass, and port:
+        private static final String DB_URL = "jdbc:mariadb://localhost:3307/";
+        private static final String DB_USER = "username";
+        private static final String DB_PASSWORD = "password";
+
+
+
+
+    -след тези промени скрипта за ресет на базата(зачистване и създаване наново, с цел да имаме еднакви входни данни
+    всеки път), ще се изпълнява всеки път преди всеки тестови клас.

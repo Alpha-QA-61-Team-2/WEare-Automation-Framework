@@ -8,7 +8,10 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 
 public class DatabaseReset {
-    //use your individual parameters:
+
+    /**
+     * IMPORTANT! use your individual parameters:
+     */
     private static final String DB_URL = "jdbc:mariadb://localhost:3307/";
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = "root";
