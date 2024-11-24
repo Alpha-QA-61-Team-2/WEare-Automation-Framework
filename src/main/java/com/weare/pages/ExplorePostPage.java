@@ -90,11 +90,6 @@ public class ExplorePostPage extends LoggedHeader {
         return dateElement.getText().contains(currentDate);
     }
 
-    public boolean isTextCorrect() {
-        WebElement commentTextElement = driver().findElement(locatorOfContentOfComment);
-        return commentTextElement.getText().contains(BODY_OF_THE_COMMENT);
-    }
-
     public boolean isCommentTextCorrect() {
         WebElement commentTextElement = driver().findElement(locatorOfContentOfComment);
         return commentTextElement.getText().contains(BODY_OF_THE_COMMENT);

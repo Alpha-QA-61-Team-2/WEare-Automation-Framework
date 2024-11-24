@@ -44,7 +44,7 @@ public class CreatePostAndCommentTest extends WEareBaseWebTest {
         createCommentLogic();
 
         //  Assert that the comment text matches what was entered
-        Assertions.assertTrue(explorePostPage.isCommentTextCorrect(), ERROR_MESSAGE_FOR_COMMENT_CONTENT);
+        assertTrue(explorePostPage.isCommentTextCorrect(), ERROR_MESSAGE_FOR_COMMENT_CONTENT);
     }
 
     @Test
@@ -53,7 +53,7 @@ public class CreatePostAndCommentTest extends WEareBaseWebTest {
         createCommentLogic();
 
         //Assert that the username is displayed correctly
-        Assertions.assertTrue(explorePostPage.isUsernameCorrectlyDisplayed(TestData.USER_1.getValue()), ERROR_MESSAGE_FOR_USERNAME);
+        assertTrue(explorePostPage.isUsernameCorrectlyDisplayed(TestData.USER_1.getValue()), ERROR_MESSAGE_FOR_USERNAME);
     }
 
     private void createCommentLogic() {
