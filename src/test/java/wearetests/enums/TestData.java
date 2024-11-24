@@ -5,7 +5,7 @@ import java.util.UUID;
 
 public enum TestData {
 
-    ADMIN_PROFILE("admin"),
+    ADMIN_PROFILE("admina"),
     USER_1("olga"),
     USER_2("martin"),
     USER_3("milko"),
