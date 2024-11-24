@@ -23,8 +23,6 @@
                 <version>3.0.0-M7</version>
                 <configuration>
                     <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
-                    <disableXmlSchema>true</disableXmlSchema> <!-- Disable schema for plain JUnit reports -->
-                    <reportFormat>plain</reportFormat> <!-- Ensures plain JUnit XML format -->
                 </configuration>
             </plugin>
 
@@ -41,7 +39,6 @@
                         </goals>
                         <configuration>
                             <outputDirectory>${project.build.directory}/junit-reports</outputDirectory>
-                            <disableXmlSchema>true</disableXmlSchema>
                         </configuration>
                     </execution>
                 </executions>
@@ -54,8 +51,6 @@
                 <version>3.0.0-M7</version>
                 <configuration>
                     <reportsDirectory>${project.build.directory}/failsafe-reports</reportsDirectory>
-                    <disableXmlSchema>true</disableXmlSchema> <!-- Disable schema for plain JUnit reports -->
-                    <reportFormat>plain</reportFormat> <!-- Ensures plain JUnit XML format -->
                 </configuration>
             </plugin>
 
@@ -63,7 +58,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version> <!-- Added version -->
+                <version>3.8.1</version>
                 <configuration>
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
