@@ -16,8 +16,8 @@ public class UserProfileTests extends WEareBaseWebTest {
     @Test
     public void userCreated_when_validDataProvided() {
         anonHeader.clickRegister();
-        registrationPage.submitRegistrationForm(TestData.USERNAME_CREATE.getValue(),
-                TestData.EMAIL.getValue(), TestData.PASSWORD.getValue(), TestData.CONFIRM_PASSWORD.getValue());
+        registrationPage.submitRegistrationForm(RandomDataType.generate(RandomDataType.USERNAME),
+                RandomDataType.generate(RandomDataType.EMAIL), TestData.PASSWORD.getValue(), TestData.CONFIRM_PASSWORD.getValue());
         Assertions.assertTrue(registrationPage.pageTitleIsSuccessful(),
                 "Page title should change to 'Successful Registration'");
     }

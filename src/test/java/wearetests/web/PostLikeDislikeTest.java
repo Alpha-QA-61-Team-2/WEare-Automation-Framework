@@ -11,7 +11,7 @@ public class PostLikeDislikeTest extends WEareBaseWebTest {
 
     @Test
     public void click_like_lost () {
-        authenticateWithUser(TestData.ADMIN_PROFILE.getValue());
+        authenticateWithUser(TestData.USER_2.getValue());
         adminHeader.viewLatestPosts();
         loggedPostsPage.clickLike();
         Assertions.assertTrue(loggedPostsPage.isDislikeButtonVisible(), "Dislike button should be visible");
@@ -19,7 +19,7 @@ public class PostLikeDislikeTest extends WEareBaseWebTest {
 
     @Test
     public void click_disLike_post () {
-        authenticateWithUser(TestData.ADMIN_PROFILE.getValue());
+        authenticateWithUser(TestData.USER_2.getValue());
         adminHeader.viewLatestPosts();
         loggedPostsPage.clickDislike();
         Assertions.assertTrue(loggedPostsPage.islikeButtonVisible(), "Like button should be visible");
