@@ -37,4 +37,16 @@ public class UserRequests {
                 .body(Files.readAllBytes(Paths.get("src/test/resources/apitestdata/update-profile.json")))
                 .post("/api/users/auth/" + id + "/personal");
     }
+
+
+    public static Response sendFriendRequest() {
+        return given().contentType(ContentType.JSON)
+                .cookie("JSESSIONID", getCookie())
+                .baseUri(baseURI)
+                .body("{\n" +
+                        "  \"id\": 40,\n" +
+                        "  \"username\": \"\"\n" +
+                        "}")
+                .post("/api/auth/request");
+    }
 }

@@ -1,30 +1,29 @@
 package wearetests.api.tests;
 
 import io.restassured.response.Response;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import wearetests.core.WEareBaseApiTest;
 
 import java.io.IOException;
 
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 import static wearetests.api.requests.PostRequests.*;
+import static wearetests.api.requests.PostRequests.deleteComment;
 
 public class PostTests extends WEareBaseApiTest {
 
     private static int postId;
     private static Response createResponse;
 
-    @BeforeAll
-    public static void setUp() throws IOException {
+    @BeforeEach
+    public void setUp() throws IOException {
         createResponse = createPost();
         postId = createResponse.jsonPath().getInt("postId");
     }
 
-    @AfterAll
-    public static void tearDown() throws IOException {
+    @AfterEach
+    public void tearDown() {
         deletePost(String.valueOf(postId));
     }
 
@@ -36,7 +35,7 @@ public class PostTests extends WEareBaseApiTest {
     }
 
     @Test
-    public void testCreatePost() throws IOException {
+    public void testCreatePost() {
         createResponse.then().assertThat().statusCode(EXPECTED_STATUS_CODE)
                 .assertThat().body("postId", notNullValue());
     }
@@ -51,5 +50,29 @@ public class PostTests extends WEareBaseApiTest {
     public void testDeletePost() {
      Response response = deletePost(String.valueOf(postId));
      response.then().assertThat().statusCode(EXPECTED_STATUS_CODE);
+    }
+
+    @Test
+    public void testLikeUnlikePost() {
+        Response response = likeUnlikePost(String.valueOf(postId));
+        response.then().assertThat().statusCode(EXPECTED_STATUS_CODE)
+                .assertThat().body("postId", equalTo(postId));
+    }
+
+    @Test
+    public void testAddComment() throws IOException {
+        Response response = addComment(String.valueOf(postId));
+        response.then().assertThat().statusCode(EXPECTED_STATUS_CODE)
+                .assertThat().body("commentId", notNullValue());
+        deleteComment(String.valueOf(response.jsonPath().getInt("commentId")));
+    }
+
+    @Test
+    public void testLikeUnlikeComment() throws IOException {
+        int commentId = addComment(String.valueOf(postId)).jsonPath().getInt("commentId");
+        Response response = likeUnlikeComment(String.valueOf(commentId));
+        response.then().assertThat().statusCode(EXPECTED_STATUS_CODE)
+                .assertThat().body("commentId", equalTo(commentId));
+        deleteComment(String.valueOf(commentId));
     }
 }

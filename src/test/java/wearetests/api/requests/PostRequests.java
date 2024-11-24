@@ -48,4 +48,36 @@ public class PostRequests {
                 .baseUri(baseURI)
                 .get("/api/post/");
     }
+
+    public static Response likeUnlikePost(String id) {
+        return given()
+                .baseUri(baseURI)
+                .cookie("JSESSIONID", getCookie())
+                .post("/api/post/auth/likesUp?postId=" + id);
+    }
+
+    public static Response addComment(String id) throws IOException {
+        String jsonBody = new String(Files.readAllBytes(Paths
+                .get("src/test/resources/apitestdata/create-comment.json")));
+        return given()
+                .contentType(ContentType.JSON)
+                .baseUri(baseURI)
+                .cookie("JSESSIONID", getCookie())
+                .body(jsonBody.replace("{{postId}}", id))
+                .post("/api/comment/auth/creator");
+    }
+
+    public static Response likeUnlikeComment(String id) {
+        return given()
+                .baseUri(baseURI)
+                .cookie("JSESSIONID", getCookie())
+                .post("/api/comment/auth/likesUp?commentId=" + id);
+    }
+
+    public static void deleteComment(String id) {
+        given()
+                .baseUri(baseURI)
+                .cookie("JSESSIONID", getCookie())
+                .delete("/api/comment/auth/manager?commentId=" + id);
+    }
 }
