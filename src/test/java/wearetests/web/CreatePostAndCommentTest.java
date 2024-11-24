@@ -34,6 +34,31 @@ public class CreatePostAndCommentTest extends WEareBaseWebTest {
     @Test
     @Order(2)
     public void createCommentTest_when_validCredentialsProvided() {
+        createCommentLogic();
+
+        //  Assert that the date in the meta element contains today’s date
+        assertTrue(explorePostPage.isDateOfThePostCorrect(), ERROR_MESSAGE_FOR_DATE_ASSERT);
+    }
+
+    @Test
+    @Order(3)
+    public void createCommentTest_when_validCredentialsProvided1() {
+        createCommentLogic();
+
+        //  Assert that the comment text matches what was entered
+        Assertions.assertTrue(explorePostPage.isCommentTextCorrect(), ERROR_MESSAGE_FOR_COMMENT_CONTENT);
+    }
+
+    @Test
+    @Order(4)
+    public void createCommentTest_when_validCredentialsProvided2() {
+        createCommentLogic();
+
+        //Assert that the username is displayed correctly
+        Assertions.assertTrue(explorePostPage.isUsernameCorrectlyDisplayed(TestData.USER_1.getValue()), ERROR_MESSAGE_FOR_USERNAME);
+    }
+
+    private void createCommentLogic() {
         authenticateWithUser(TestData.USER_1.getValue());
 
         // find latest posts
@@ -46,14 +71,6 @@ public class CreatePostAndCommentTest extends WEareBaseWebTest {
 
         // click show comments button:
         explorePostPage.viewComments();
-
-        //  Assert that the date in the meta element contains today’s date
-        assertTrue(explorePostPage.isDateOfThePostCorrect(), ERROR_MESSAGE_FOR_DATE_ASSERT);
-
-        //  Assert that the comment text matches what was entered
-        assertTrue(explorePostPage.isTextCorrect(), ERROR_MESSAGE_FOR_COMMENT_CONTENT);
-
-        //  Assert that the username is displayed correctly
-        assertTrue(explorePostPage.isUsernameCorrectlyDisplayed(TestData.USER_1.getValue()), ERROR_MESSAGE_FOR_USERNAME);
     }
 }
+
