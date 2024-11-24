@@ -18,13 +18,9 @@ public class PostCreationEditPage extends LoggedHeader {
 
     protected static final String BODY_OF_THE_POST = "this is a post test post is this is this what is this this is it!";
 
-    //todo move to parent
-    public void scrollDown() {
-        JavascriptExecutor js = (JavascriptExecutor) driver().getWebDriver();
-        js.executeScript("window.scrollBy(0, 400);");
-    }
 
     public void selectFromDropdownAndClickInBodyOfThePost() {
+        //driver().scrollToElement(dropdownButton);
         driverWait().until(ExpectedConditions.visibilityOfElementLocated(dropdownButton)).click();
         driver().findElement(textField).click();
         driver().findElement(textField).sendKeys(BODY_OF_THE_POST);

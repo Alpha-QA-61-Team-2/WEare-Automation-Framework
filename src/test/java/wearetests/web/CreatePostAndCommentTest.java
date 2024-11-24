@@ -21,8 +21,6 @@ public class CreatePostAndCommentTest extends WEareBaseWebTest {
         authenticateWithUser(TestData.USER_1.getValue());
         // 2 find element post in navigation bar and click it:
         loggedHeader.clickAddNewPost();
-        // 3 Scroll down:
-        postCreationEditPage.scrollDown();
         // 4 select public post and fill body of the post:
         postCreationEditPage.selectFromDropdownAndClickInBodyOfThePost();
         // 5 find element post button and click on it:

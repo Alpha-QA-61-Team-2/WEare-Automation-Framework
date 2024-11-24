@@ -13,6 +13,7 @@ public enum TestData {
     USERNAME_CREATE("ussser"),
     EMAIL("rndm@abv.com"),
     PASSWORD("123456"),
+    //PASSWORD("111111"),
     CONFIRM_PASSWORD("123456"),
     WRONG_PASSWORD("wrong"),
     FIRST_NAME("Test"),
