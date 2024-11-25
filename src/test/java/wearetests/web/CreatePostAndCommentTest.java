@@ -17,15 +17,8 @@ public class CreatePostAndCommentTest extends WEareBaseWebTest {
     @Test
     @Order(1)
     public void createPostTest_when_validCredentialsProvided() {
-        //1 login
-        authenticateWithUser(TestData.USER_1.getValue());
-        // 2 find element post in navigation bar and click it:
-        loggedHeader.clickAddNewPost();
-        // 4 select public post and fill body of the post:
-        postCreationEditPage.selectFromDropdownAndClickInBodyOfThePost();
-        // 5 find element post button and click on it:
-        postCreationEditPage.submitPost();
-        // 6 Check that the confirmation message text matches the expected message content:
+        createPost();
+        //Check that the confirmation message text matches the expected message content:
         assertTrue(postCreationEditPage.isSuccessMessageVisible(), ERROR_MESSAGE_IF_POST_IS_NOT_CREATED);
     }
 

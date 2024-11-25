@@ -3,6 +3,7 @@ package wearetests.api.requests;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import wearetests.enums.RandomDataType;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,12 +17,13 @@ public class UserRequests {
 
 
     public static Response registerUser() throws IOException {
+        String jsonBody = new String(Files.readAllBytes(Paths
+                .get("src/test/resources/apitestdata/register-user.json")));
         return given().contentType(ContentType.JSON)
                 .baseUri(baseURI)
-                .body(Files.readAllBytes(Paths.get("src/test/resources/apitestdata/register-user.json")))
+                .body(jsonBody.replace("{{username}}", RandomDataType.generate(RandomDataType.USERNAME)))
                 .post("/api/users/");
     }
-
 
     public static Response getUserById(String id) {
         return given()
@@ -48,5 +50,12 @@ public class UserRequests {
                         "  \"username\": \"\"\n" +
                         "}")
                 .post("/api/auth/request");
+    }
+
+    public static Response approveFriendRequest(String senderId, String requestId) {
+        return given().contentType(ContentType.JSON)
+                .cookie("JSESSIONID", getCookie())
+                .baseUri(baseURI)
+                .post("/api/auth/users/ " + senderId + "/request/approve?requestId=" + requestId);
     }
 }

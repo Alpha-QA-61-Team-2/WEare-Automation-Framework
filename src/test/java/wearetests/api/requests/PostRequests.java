@@ -2,6 +2,7 @@ package wearetests.api.requests;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.BeforeAll;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -22,16 +23,12 @@ public class PostRequests {
                 .post("/api/post/auth/creator");
     }
 
-    public static Response editPost(String id) {
+    public static Response editPost(String id) throws IOException {
         return given()
                 .contentType(ContentType.JSON)
                 .baseUri(baseURI)
                 .cookie("JSESSIONID", getCookie())
-                .body("{\n" +
-                        "  \"content\": \"Update post\",\n" +
-                        "  \"picture\": \"string\",\n" +
-                        "  \"public\": true\n" +
-                        "}")
+                .body(Files.readAllBytes(Paths.get("src/test/resources/apitestdata/edit-post.json")))
                 .put("/api/post/auth/editor?postId=" + id);
     }
 

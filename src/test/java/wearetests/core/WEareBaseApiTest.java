@@ -24,7 +24,7 @@ public class WEareBaseApiTest extends BaseApiTest {
     public static final String REGISTRATION_CONFIRM_STRING = "was created";
 
     @BeforeEach
-    public void beforeTests() throws IOException {
+    public void beforeTests() {
         // perform some code before each test starts
         EncoderConfig encoderConfig = RestAssured.config().getEncoderConfig()
                 .appendDefaultContentCharsetToContentTypeIfUndefined(false);

@@ -5,6 +5,7 @@ import io.restassured.response.Response;
 import testframework.PropertiesManager;
 import testframework.core.BaseApiService;
 
+import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
 
 public class WEareApi extends BaseApiService {
@@ -15,7 +16,7 @@ public class WEareApi extends BaseApiService {
 
     public static String getCookie() {
         Response loginResponse = given()
-                .baseUri("http://localhost:8081/")
+                .baseUri(baseURI)
                 .formParam("username", "milko")
                 .formParam("password", "111111")
                 .post("/authenticate");

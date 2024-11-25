@@ -12,9 +12,8 @@ public enum TestData {
     VALID_USER_ID("43"),
     USERNAME_CREATE("ussser"),
     EMAIL("rndm@abv.com"),
-    PASSWORD("123456"),
-    //PASSWORD("111111"),
-    CONFIRM_PASSWORD("123456"),
+    //todo agree what common password are we using
+    PASSWORD("111111"),
     WRONG_PASSWORD("wrong"),
     FIRST_NAME("Test"),
     LAST_NAME("Testov"),
@@ -30,21 +29,5 @@ public enum TestData {
     public String getValue() {
         return value;
     }
-
-
-    /*public static final int USERNAME_LENGTH = 3;
-    private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";*/
-
-    /*private static String generateUniqueUsername() {
-        StringBuilder username = new StringBuilder(USERNAME_LENGTH);
-        Random random = new Random(System.currentTimeMillis());  // Seed the random generator for more randomness
-
-        for (int i = 0; i < USERNAME_LENGTH; i++) {
-            int randomIndex = random.nextInt(ALPHABET.length());
-            username.append(ALPHABET.charAt(randomIndex));
-        }
-
-        return username.toString();
-    }*/
 
 }

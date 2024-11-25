@@ -15,17 +15,16 @@ import static wearetests.api.requests.UserRequests.*;
 
 public class UserTests extends WEareBaseApiTest {
 
-    //private static String userId;
+    private static String userId;
     private static Response registerResponse;
 
     //todo find a way to pass newly registered user's creds to getCookie method in WEareApi
     @BeforeAll
     public static void setup() throws IOException {
         registerResponse = registerUser();
-        //userId = registerResponse.getBody().asString().split(" ")[6];
+        userId = registerResponse.getBody().asString().split(" ")[6];
     }
 
-    //todo fix below so that it can run multiple times
     @Test
     public void testUserRegistration() {
         verifyStatusCodeIs200(registerResponse);
@@ -34,22 +33,30 @@ public class UserTests extends WEareBaseApiTest {
 
     @Test
     public void testGetUserById() {
-        Response response = getUserById("userId");
+        Response response = getUserById(userId);
         verifyStatusCodeIs200(response);
     }
 
 
     //todo fix below
-    /*@Test
+    @Test
     public void testUpdateUserProfile() throws IOException {
-        Response response = updateUserProfile(userId);
+        Response response = updateUserProfile("41");
         verifyStatusCodeIs200(response);
         Assert.assertNotNull(response.jsonPath().get("id"));
-    }*/
+    }
 
     @Test
     public void testSendFriendRequest() {
         Response response = sendFriendRequest();
+        response.then().assertThat().statusCode(EXPECTED_STATUS_CODE);
+    }
+
+
+    //todo fix below or remove
+    @Test
+    public void testApproveFriendRequest() {
+        Response response = approveFriendRequest("41", "29");
         response.then().assertThat().statusCode(EXPECTED_STATUS_CODE);
     }
 }

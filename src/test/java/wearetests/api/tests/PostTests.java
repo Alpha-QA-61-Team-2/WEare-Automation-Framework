@@ -41,7 +41,7 @@ public class PostTests extends WEareBaseApiTest {
     }
 
     @Test
-    public void testEditPost() {
+    public void testEditPost() throws IOException {
         Response response = editPost(String.valueOf(postId));
         response.then().log().ifValidationFails().statusCode(EXPECTED_STATUS_CODE);
     }

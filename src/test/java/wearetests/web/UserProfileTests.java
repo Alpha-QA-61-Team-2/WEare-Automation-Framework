@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import wearetests.core.WEareBaseWebTest;
+import wearetests.enums.RandomDataType;
 import wearetests.enums.TestData;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -17,7 +18,7 @@ public class UserProfileTests extends WEareBaseWebTest {
     public void userCreated_when_validDataProvided() {
         anonHeader.clickRegister();
         registrationPage.submitRegistrationForm(RandomDataType.generate(RandomDataType.USERNAME),
-                RandomDataType.generate(RandomDataType.EMAIL), TestData.PASSWORD.getValue(), TestData.CONFIRM_PASSWORD.getValue());
+                RandomDataType.generate(RandomDataType.EMAIL), TestData.PASSWORD.getValue(), TestData.PASSWORD.getValue());
         Assertions.assertTrue(registrationPage.pageTitleIsSuccessful(),
                 "Page title should change to 'Successful Registration'");
     }
@@ -27,7 +28,7 @@ public class UserProfileTests extends WEareBaseWebTest {
         anonHeader.clickRegister();
         registrationPage.submitRegistrationForm(TestData.USER_3.getValue(), TestData.EMAIL.getValue()
                 , TestData.PASSWORD.getValue()
-                , TestData.CONFIRM_PASSWORD.getValue());
+                , TestData.PASSWORD.getValue());
         Assertions.assertTrue(registrationPage.isExistingUsernameMsgDisplayed(),
                 "Existing username message should be displayed.");
     }
@@ -37,7 +38,7 @@ public class UserProfileTests extends WEareBaseWebTest {
     public void userNotCreated_when_providingAlreadyRegisteredEmail() {
         anonHeader.clickRegister();
         registrationPage.submitRegistrationForm("testmest", "some@abv.bg", TestData.PASSWORD.getValue()
-                , TestData.CONFIRM_PASSWORD.getValue());
+                , TestData.PASSWORD.getValue());
         Assertions.assertFalse(registrationPage.pageTitleIsSuccessful(),
                 "User should not be created.");
     }
@@ -47,14 +48,14 @@ public class UserProfileTests extends WEareBaseWebTest {
     public void userNotCreated_when_providingInvalidUsername(String username) {
         anonHeader.clickRegister();
         registrationPage.submitRegistrationForm(username, TestData.EMAIL.getValue(), TestData.PASSWORD.getValue()
-                , TestData.CONFIRM_PASSWORD.getValue());
+                , TestData.PASSWORD.getValue());
         Assertions.assertFalse(registrationPage.pageTitleIsSuccessful(),
                 "User should not be created.");
     }
 
     @Test
     public void userCanUpdateProfile_when_validDataProvided() {
-        authenticateWithUser(TestData.USER_1.getValue());
+        authenticateWithUser(TestData.USER_3.getValue());
         loggedHeader.goToPersonalProfile();
         personalProfilePage.openEditor();
         profileEditorPage.submitUpdateForm(TestData.FIRST_NAME.getValue(), TestData.LAST_NAME.getValue());

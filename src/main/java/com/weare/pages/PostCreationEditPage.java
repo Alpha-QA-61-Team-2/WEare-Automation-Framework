@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 
 
 public class PostCreationEditPage extends LoggedHeader {
@@ -13,15 +14,13 @@ public class PostCreationEditPage extends LoggedHeader {
     protected final By textField = By.id("message");
     protected final By chooseFileBtn = By.id("imagefile");
     protected final By savePostBtn = By.cssSelector("input[type='submit']");
-    //protected final By likeButton =
-    protected final By dropdownButton = By.xpath("//option[. = 'Public post']");
 
     protected static final String BODY_OF_THE_POST = "this is a post test post is this is this what is this this is it!";
 
 
     public void selectFromDropdownAndClickInBodyOfThePost() {
-        //driver().scrollToElement(dropdownButton);
-        driverWait().until(ExpectedConditions.visibilityOfElementLocated(dropdownButton)).click();
+        Select visibility = new Select(driver().findElement(visibilitySelector));
+        visibility.selectByVisibleText("Public post");
         driver().findElement(textField).click();
         driver().findElement(textField).sendKeys(BODY_OF_THE_POST);
     }
