@@ -13,7 +13,7 @@ public enum TestData {
     USERNAME_CREATE("ussser"),
     EMAIL("rndm@abv.com"),
     //todo agree what common password are we using
-    PASSWORD("111111"),
+    PASSWORD("123456"),
     WRONG_PASSWORD("wrong"),
     FIRST_NAME("Test"),
     LAST_NAME("Testov"),
