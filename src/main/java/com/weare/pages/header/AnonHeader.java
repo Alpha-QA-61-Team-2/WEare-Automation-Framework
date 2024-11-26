@@ -13,6 +13,7 @@ public class AnonHeader extends BaseHeader{
     }
 
     public void clickSignIn() {
+        driverWait().until(ExpectedConditions.visibilityOfElementLocated(signInBtn));
         driver().findElement(signInBtn).click();
     }
 }

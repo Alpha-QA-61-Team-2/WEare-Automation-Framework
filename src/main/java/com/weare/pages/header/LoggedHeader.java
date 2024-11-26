@@ -33,4 +33,8 @@ public class LoggedHeader extends BaseHeader {
     public void clickLatestPost() {
         driver().findElement(latestPostField).click();
     }
+
+    public void goToHomePage() {
+        driver().findElement(homeBtn).click();
+    }
 }

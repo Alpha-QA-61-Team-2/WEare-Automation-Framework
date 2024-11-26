@@ -10,6 +10,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import testframework.PropertiesManager;
 import testframework.core.BaseWebTest;
 import wearetests.enums.TestData;
@@ -87,7 +88,8 @@ public class WEareBaseWebTest extends BaseWebTest {
         loggedHeader.clickAddNewPost();
         postCreationEditPage.selectFromDropdownAndClickInBodyOfThePost();
         postCreationEditPage.submitPost();
-
+        loggedHeader.goToHomePage();
+        loggedHeader.clickLogoutBtn();
     }
 
     public void createComment() {
@@ -96,6 +98,8 @@ public class WEareBaseWebTest extends BaseWebTest {
         loggedPostsPage.explorePost();
         explorePostPage.fillTextInCommentField();
         explorePostPage.submitComment();
+        loggedHeader.goToHomePage();
+        loggedHeader.clickLogoutBtn();
     }
 }
 

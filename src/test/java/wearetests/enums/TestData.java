@@ -12,7 +12,6 @@ public enum TestData {
     VALID_USER_ID("43"),
     USERNAME_CREATE("ussser"),
     EMAIL("rndm@abv.com"),
-    //todo agree what common password are we using
     PASSWORD("123456"),
     WRONG_PASSWORD("wrong"),
     FIRST_NAME("Test"),

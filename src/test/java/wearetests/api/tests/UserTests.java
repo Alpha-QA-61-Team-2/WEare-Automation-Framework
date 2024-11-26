@@ -18,7 +18,6 @@ public class UserTests extends WEareBaseApiTest {
     private static String userId;
     private static Response registerResponse;
 
-    //todo find a way to pass newly registered user's creds to getCookie method in WEareApi
     @BeforeAll
     public static void setup() throws IOException {
         registerResponse = registerUser();

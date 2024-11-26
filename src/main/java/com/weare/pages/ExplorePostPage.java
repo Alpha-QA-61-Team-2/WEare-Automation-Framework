@@ -69,6 +69,7 @@ public class ExplorePostPage extends LoggedHeader {
 
     public void fillTextInCommentField() {
         driver().scrollToElement(commentTextField);
+
         driver().findElement(commentTextField).click();
         driver().findElement(commentTextField).sendKeys(BODY_OF_THE_COMMENT);
     }
