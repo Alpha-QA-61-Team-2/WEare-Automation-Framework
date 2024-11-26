@@ -18,7 +18,7 @@ public class WEareApi extends BaseApiService {
         Response loginResponse = given()
                 .baseUri(baseURI)
                 .formParam("username", "milko")
-                .formParam("password", "111111")
+                .formParam("password", "123456")
                 .post("/authenticate");
 
         return loginResponse.then()
