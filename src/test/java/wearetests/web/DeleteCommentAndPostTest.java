@@ -1,21 +1,20 @@
 package wearetests.web;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import wearetests.core.WEareBaseWebTest;
 import wearetests.enums.TestData;
+
+import java.io.IOException;
 
 public class DeleteCommentAndPostTest extends WEareBaseWebTest {
 
     @BeforeEach
-    public void setup() {
+    public void setup() throws IOException {
         createPost();
         createComment();
         authenticateWithUser(TestData.ADMIN_PROFILE.getValue());
     }
-    
+
     @Test
     public void commentIsDeleted_when_confirmed() {
         adminHeader.viewLatestPosts();

@@ -4,10 +4,12 @@ import org.junit.jupiter.api.*;
 import wearetests.core.WEareBaseWebTest;
 import wearetests.enums.TestData;
 
+import java.io.IOException;
+
 public class EditPostAndCommentTest extends WEareBaseWebTest {
 
     @BeforeEach
-    public void setup() {
+    public void setup() throws IOException {
         createPost();
         createComment();
         authenticateWithUser(TestData.ADMIN_PROFILE.getValue());
